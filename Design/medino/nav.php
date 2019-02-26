@@ -1,0 +1,48 @@
+<!-- Header Area Starts -->
+<header class="header-area">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 d-md-flex">
+                    <h6 class="mr-3"><span class="mr-2"><i class="fa fa-mobile"></i></span> call us now! +1 4385316</h6>
+                    <h6 class="mr-3"><span class="mr-2"><i class="fa fa-envelope-o"></i></span> medinocare@gmail.com</h6>
+                        <h6 class="mr-3"><span class="mr-2"><i class="fa fa-dollar"></i></span> Cash on delivery</h6>
+                </div>
+                <div class="col-lg-3">
+                    <div class="social-links">
+                        <ul>
+                            <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://np.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="header" id="home">
+        <div class="container">
+            <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo">
+                <a href="index.html"><img src="assets/images/logo/logo.png" alt="logo.png"  /></a>
+            </div>
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li class="menu-active"><a href="index.php">Home</a></li>
+                    <li><a href="medicine.php">Medicine</a></li>
+                    <li><a href="features.php">Features</a></li>
+                    <li><a href="contact.php">Contact</a></li>
+                    <li><a href="login.php"><span><i></i>Login</span></a></li>
+                    <li><abbr title="help" ><a href="help.php"><span><i class="fa fa-question"></i></span></a></abbr></li>
+
+                </ul>
+            </nav><!-- #nav-menu-container -->
+            </div>
+        </div>
+    </div>
+
+
+</header>
+<!-- Header Area End -->
