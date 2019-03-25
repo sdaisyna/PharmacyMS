@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1>Medicine</h1>
-                <a href="index.php">Home</a> <span>|</span> <a href="medicine.php">Medicine</a>
+                <a href="/">Home</a> <span>|</span> <a href="/medicine">Medicine</a>
             </div>
         </div>
     </div>
@@ -16,78 +16,77 @@
 <!-- Banner Area End -->
 
 
-<section class="row">
-
-</section>
-
 
 <section class="specialist-area section-padding">
-<form action="">
-<input type="text" name="search" id="" placeholder="Search">
-</form>
-        <div class="container">
-            <div class="row">
+    <div class="container">
+
+    <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-top text-center">
-                        <h2>Our categories</h2>
+                        <h2>Our medicine</h2>
                     </div>
                 </div>
-            </div>
+            
+
+    <div class="col-sm-8 offset-md-2">
+<form class="form-header" action="" method="POST">
+  <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Search medicine" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+  </div>
+
+  <p style="margin-left:20px;margin-right: 20px;">OR</p>
+  <button class="btn btn-outline-primary pl-4 pr-4"><i class="fa fa-sign-in 3x"></i>Upload Prescription Report</button>
+ </form>
+
+ </div>
+</div>
+</div>
+        
+        </div>     
+
+        <br> 
+        <br>
+        <br>          
+        <div class="container">
             <div class="row">
+           
                 <div class="col-lg-3 col-sm-6">
+               
                     <div class="single-doctor mb-4 mb-lg-0">
+                        <h3 class="text-center" style="color: grey;">Categories</h3>
+                  
                         <div class="doctor-img">
-                            <img src="assets/images/pills.jpg" alt="Prescription" class="img-fluid">
+                        @foreach($medicinetype as $medicinetypes)
+                         
                         </div>
                         <div class="content-area">
+                      
                             <div class="doctor-name text-center">
-                                <a href="medicine.php"><h3>Prescriptions</h3></a>
-                                <h6>Cure your disease</h6>
+                           
+                                <a href="medicine.php"><h3>{!! $medicinetypes->medicine_type_name!!}</h3></a>
+                            
+                              
                             </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-doctor mb-4 mb-lg-0">
-                        <div class="doctor-img">
-                            <img src="assets/images/personal care.jpg" alt="personal care" class="img-fluid">
-                        </div>
-                        <div class="content-area">
-                            <div class="doctor-name text-center">
-                                <a href="medicine.php"><h3>Personal care</h3></a>
-                                <h6>Be healthy and wealthy</h6>
-                            </div>
-                        </div>
-                    </div>
+            
+
+
+                <div class="col-lg-9 col-md-12 mt-5">
+
+                   
+
+                    
                 </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-doctor mb-4 mb-sm-0">
-                        <div class="doctor-img">
-                            <img id="photo" src="assets/images/firstaidkit.jpg" alt="first aid kit" class="img-fluid">
-                        </div>
-                        <div class="content-area">
-                            <div class="doctor-name text-center">
-                              <a href="medicine.php">  <h3>First aid kit</h3></a>
-                                <h6>we believe in keeping you safe</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="single-doctor">
-                        <div class="doctor-img">
-                            <img src="assets/images/selfmed1.jpg" alt="" class="img-fluid" >
-                        </div>
-                        <div class="content-area">
-                            <div class="doctor-name text-center">
-                                <h3>self medication</h3>
-                                <h6>be first doctor of your health</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+              
+         
             </div>
         </div>
     </section>
     <!-- Specialist Area Starts -->
+
 @endsection

@@ -8,6 +8,8 @@ class Medicine extends Model
 {
     protected $table="medicine";
 
+    protected $primaryKey="medicine_id"; 
+
     protected $fillable=['medicine_name','description','rate','image','manufacture_date','expiry_date','vendor_id','medicine_type_id',];
 }
 ?>

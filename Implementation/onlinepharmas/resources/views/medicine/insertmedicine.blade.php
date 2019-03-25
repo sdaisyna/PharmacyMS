@@ -54,16 +54,16 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="/pharmacistPanel">
                                 <i class="fas fa-user"></i>Pharmacist Panel</a>
 
                         </li>
                         <li>
-                            <a href="medicine.html">
+                            <a href="/addmedicine">
                                 <i class="fas fa-pills"></i>Medicine</a>
                         </li>
                         <li>
-                            <a href="category.html">
+                            <a href="/addmedicinetype">
                                 <i class="fas fa-calendar-alt"></i>Categories</a>
                         </li>
                         <li>
@@ -96,16 +96,16 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                       <li class="has-sub">
-                          <a class="js-arrow" href="admin.html">
+                          <a class="js-arrow" href="/pharmacistPanel">
                               <i class="fas fa-user"></i>Pharmacist Panel</a>
 
                       </li>
                       <li>
-                          <a href="medicine.html">
+                          <a href="/addmedicine">
                               <i class="fas fa-pills"></i>Medicine</a>
                       </li>
                       <li>
-                          <a href="category.html">
+                          <a href="/addmedicinetype">
                               <i class="fas fa-calendar-alt"></i>Categories</a>
                       </li>
                       <li>
@@ -151,8 +151,12 @@
                                             <div class="account-dropdown__body">
 
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                                <a href="{{ route('logout')}}"
+                                                     onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"><i class="zmdi zmdi-power"></i>Logout</a></a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{@csrf_field()}}
+                                                 </form>
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +183,8 @@
                         <div class="row m-t-25">
                           <div class="col-12">
                           <div class="jumbotron">
-                            <div class="col-sm-10">
+                            <div class="col-sm-8">
+
 
    <form method="POST" action="{!! url('/insertmedicine') !!}" enctype="multipart/form-data">
    {{ csrf_field() }} 
@@ -188,6 +193,19 @@
          <label for="medicine name"><i class="fa fa-pills"></i> Medicine name :</label>
      <input class="form-control" name="medicine_name" >
 </div>
+
+<div class="form-group">
+  <label for="medicine_category"><i class="fa fa-pills"></i> Medicine category :</label>
+  <br>
+  <select class="col-sm-12" name="medicine_type_name">
+  @foreach($medicinetype as $medType)
+           <option value={{ $medType->medicine_type_id }}>{{$medType->medicine_type_name}}</option>
+           @endforeach
+
+
+</select>
+</div>  
+
 
      <div class="form-group">
        <label for="desciption"><i class="fa fa-sticky-note"></i>Description :</label>
@@ -199,11 +217,18 @@
      <input type="form-control" name="rate" class="form-control" >
      </div>
 
-<div class="form-group">
-<label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
-<input class="form-control" type="file" name="image" >
-<input type="hidden" name="image">
-</div>
+<!-- image -->
+                          <div class="form-group">
+            <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
+              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required>
+              @if ($errors->has('image'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
+         
+        
+            </div>
 
 <div class="form-group">
      <label for=" manufacture date"><i class="fa fa-calendar"></i>  Manufactured date :</label>
@@ -215,15 +240,6 @@
      <input type="date" name="expiry_date" class="form-control" >
      </div>
 
-     <div class="form-group">
-     <label for="medicine category"><i class="fa fa-calendar"></i>Medicine category : </label>
-
-    		<select class="form-control">
-    			<option selected="">Personal hygiene</option>
-    			<option>Admin</option>
-    			<option>Manager</option>
-    		</select>
-    	</div>
 
 
 
@@ -231,9 +247,9 @@
    <div class="col-md-6">
      <input type="submit" name="add" class="btn btn-success form-control" value="ADD">
    </div>
-   <!-- <div class="col-md-6">
+   <div class="col-md-6">
 <input type="submit" name="update" class="btn btn-info form-control" value="UPDATE">
-   </div> -->
+   </div>
  </div>
 </form>
  
@@ -241,15 +257,90 @@
 </div>
 </div>
 
-<div class="">
-  <table border="2px">
-    <thead>
-      <th>Daisyna</th>
-      <th>Shrestha</th>
-    </thead>
-  </table>
-
+<div class="container">
+        <h2>List of medicine</h2>
+        <div class="row" >
+<div class="col-md-4">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search medicine"
+style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);">
 </div>
+</div>
+        <table class="table table-bordered" id="myTable">
+            <thead>
+            <tr>
+                <th>SN.</th>
+                <th>Medicine name</th>
+                <th>Medicine type</th>
+                <th>Rate</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody> 
+            @if($medicine->count())
+                @foreach($medicine as $medicines)
+                    <tr>
+                    <td>{{$medicines->medicine_id}}</td>
+                    <td>{!! str_limit($medicines->medicine_name,60) !!}
+                    <a href="#{{$medicines->medicine_id}}" data-toggle="collapse" data-parent="#accordion">View info</a>
+                    <div id="{{$medicines->medicine_id}}" class="panel-collapse collapse in">
+                    <h6>
+                    Description: 
+                    <label style="font-weight:400;">{!! str_limit($medicines->description,2400) !!}</label>
+                    </h6>
+
+                    <h6>
+                    Manufactured date: 
+                    <label style="font-weight:400;">{!! str_limit($medicines->manufacture_date) !!}</label>
+                    </h6>
+
+                    <h6>
+                    Expiry date: 
+                    <label style="font-weight:400;">{!! str_limit($medicines->expiry_date) !!}</label>
+                    </h6>
+
+                    <h6>
+                    Posted date: 
+                    <label style="font-weight:400;">{!! $medicines->created_at !!}</label>
+                    </h6>
+
+                    <h6></h6>
+                    </div>
+                    </td>
+                        <td>{!! str_limit($medicines->medicine_type_name,2600) !!}</td>
+                     
+                        <td>{!! str_limit($medicines->rate,2200) !!}</td>
+                        <td>
+                            <img src="/{{ $medicines->image}}" style="height:90px; width:90px;">
+                        </td>
+                        
+                        
+                        
+                          <td>  
+                            <form action="{{url('/updatemedicine',$medicines->medicine_id)}}" method="POST">
+                            {{ csrf_field() }} 
+                                {!! method_field('GET') !!}
+                                
+                                <button type="submit" name="edit" class="btn btn-primary btn-sm"> Edit</button>
+                            </form>
+                            
+                        </td>
+                        <td><form action="{{url('/addmedicine',$medicines->medicine_id)}}" method="POST">
+                            {{ csrf_field() }} 
+                                {!! method_field('DELETE') !!}
+                                
+                                <button onclick="if (!confirm('Are you sure to delete this medicine?')) { return false }" type="submit" name="delete" class="btn btn-danger btn-sm"> Delete</button>
+                            </form></td>
+                    </tr> 
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="4"> No record found</td>
+                </tr>
+            @endif
+            </tbody>
+        </table>
+    </div>
 
                         </div>
 
@@ -262,6 +353,28 @@
         </div>
 
     </div>
+    <script>
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>

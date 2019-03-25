@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Medicine;
+use App\MedicineType;
 use Illuminate\Http\Request;
+use DB;
 
 class InsertMedicineController extends Controller
 {
@@ -34,30 +36,43 @@ class InsertMedicineController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate(request(),[
-            'medicine_name'=>'required |max:150',
-            'description'=>'nullable|max:1200',
-            'image'=>'nullable'
-        ],[
-            'medicine_name.required'=> 'Medicine name is required'
-        ] );
+        // $this->validate(request(),[
+        //     'medicine_name'=>'required |max:150',
+        //     'description'=>'nullable|max:1200',
+        //     'image'=>'nullable'
+        // ],[
+        //     'medicine_name.required'=> 'Medicine name is required'
+        // ] );
         $req=request();
         $form_req=$req->all();
         $medicine=new Medicine();
 
 
+        $pictureInfo = $request->file('image');
+
+        $picName = $pictureInfo->getClientOriginalName();
+
+        $folder = "itemImages/";
+
+        $pictureInfo->move($folder,$picName);
+
+        $picUrl = $folder.$picName;
+        if(MedicineType::where('image', '=', $picUrl)->exists()) //Medicine from model name.
+        {
+            return redirect('/addmedicine')->with('itemNameExists','Please!!insert image with another name');
+        }
+
+ 
 
         $medicine->medicine_name=$form_req['medicine_name'];
+        $medicine->medicine_type_id=$form_req['medicine_type_name'];
         $medicine->description=$form_req['description'];
         $medicine->rate=$form_req['rate'];
-        // $medicine->image=$form_req['image'];
+        $medicine->image=$picUrl;
         $medicine->manufacture_date=$form_req['manufacture_date'];
-        $medicine->expiry_date=$form_req['expiry_date'];
-        // $medicine->vendor_id=1,
-        $medicine->medicine_type_id=$form_req['medicine_type_id'];
-      
+        $medicine->expiry_date=$form_req['expiry_date'];  
         $status=$medicine->save();
-        return redirect()->to('/insertmedicine');
+        return redirect()->to('/addmedicine');
 
 
 
@@ -82,7 +97,8 @@ class InsertMedicineController extends Controller
      */
     public function edit($id)
     {
-        //
+         $medicine=Medicine::find($id);
+        return view('medicine.updatemedicine')->with('medicine',$medicine); 
     }
 
     /**
@@ -105,6 +121,41 @@ class InsertMedicineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $medicine=Medicine::find($id);
+
+         $medicine->delete();
+            return redirect()->to('/addmedicine')->withSuccess('Medicine deleted successfully !');
+    }
+
+    
+    public function getMedicineType()
+    {
+        $medicinetype = new MedicineType();
+        $medicinetype = $medicinetype->get();
+
+        $medicine = DB::table('medicine')
+        ->join('medicine_type','medicine_type.medicine_type_id','=','medicine.medicine_type_id')  
+        ->select('medicine_type.*','medicine.*') 
+        ->get();     
+        return view('medicine.insertmedicine',compact('medicinetype','medicine'));
+    }
+
+       public function getMedicineTypeUpdate()
+    {
+        $medicinetype = new MedicineType();
+        $medicinetype = $medicinetype->get();
+
+        $medicine = DB::table('medicine')
+        ->join('medicine_type','medicine_type.medicine_type_id','=','medicine.medicine_type_id')  
+        ->select('medicine_type.*','medicine.*') 
+        ->get();     
+        return view('medicine.updatemedicine',compact('medicinetype','medicine'));
+    }
+
+     public function allmedicine()
+    {
+        $medicine=new Medicine();
+        $medicine=$medicine->get();
+        return view('medicine',['medicine'=>$medicine]);
     }
 }

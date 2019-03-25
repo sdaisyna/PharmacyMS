@@ -57,16 +57,16 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="profile.html">
+                            <a class="js-arrow" href="/phamacistPanel">
                                 <i class="fas fa-user"></i>Pharmacist Panel</a>
 
                         </li>
                         <li>
-                            <a href="medicine.html">
+                            <a href="/addmedicine">
                                 <i class="fas fa-pills"></i>Medicine</a>
                         </li>
                         <li>
-                            <a href="category.html">
+                            <a href="/addmedicinetype">
                                 <i class="fas fa-calendar-alt"></i>Categories</a>
                         </li>
                         <li>
@@ -99,16 +99,16 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                       <li class="has-sub">
-                          <a class="js-arrow" href="chart.html">
+                          <a class="js-arrow" href="/pharmacistPanel">
                               <i class="fas fa-user"></i>Pharmacist Panel</a>
 
                       </li>
                       <li>
-                          <a href="medicine.html">
+                          <a href="/addmedicine">
                               <i class="fas fa-pills"></i>Medicine</a>
                       </li>
                       <li>
-                          <a href="category">
+                          <a href="/addmedicinetype">
                               <i class="fas fa-calendar-alt"></i>Categories</a>
                       </li>
                       <li>
@@ -154,8 +154,12 @@
                                             <div class="account-dropdown__body">
 
                                             <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                               <a href="{{ route('logout')}}"
+                                                     onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"><i class="zmdi zmdi-power"></i>Logout</a></a>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                    {{@csrf_field()}}
+                                                 </form>
                                             </div>
                                         </div>
                                     </div>
@@ -190,20 +194,45 @@
                                 <label for="category"><i class="fa fa-product"></i> Medicine category :</label>
                       		  <input  type="text" class="form-control" placeholder="Create medicine category" name="category_name" required>
                       		</div>
-                              <div class="form-group">
-                         <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
-                         <input class="form-control" type="file" name="image" >
-                          <input type="hidden" name="image">
-                          </div>
+
+
+
+                          <div class="form-group">
+            <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
+              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required onchange="PreviewImage()">
+              @if ($errors->has('image'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+
+                                @endif
+                                <img id="uploadPreview" style="width:150px; height:150px; "/>
+
+                                <script type="text/javascript">
+
+                function PreviewImage() {
+                    var oFReader = new FileReader();
+                    oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+                    oFReader.onload = function (oFREvent) {
+                        document.getElementById("uploadPreview").src = oFREvent.target.result;
+                    };
+                };
+
+            </script>
+
+         
+        
+            </div> 
+
+
                              <div class="row">
                                 <div class="col-md-6">
+                               
                                   <input type="submit" name="add" class="btn btn-success form-control" value="Add">
-
-                                </div>
-                                <div class="col-md-6">
-                                  <input type="submit" name="update" class="btn btn-info form-control" value="Update">
-
-                                </div>
+                                 </div>
+                                
+                            
                       	   </div>
 
                       	</form>
@@ -218,7 +247,13 @@
 
 <div class="container">
         <h2>List of medicine category</h2>
-        <table class="table table-bordered">
+        <div class="row" >
+<div class="col-md-4">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search medicine"
+style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);">
+</div>
+</div>
+        <table class="table table-bordered" id="myTable">
             <thead>
             <tr>
                 <th>SN.</th>
@@ -228,25 +263,35 @@
                 <th>Action</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody> 
             @if($medicine->count())
                 @foreach($medicine as $medicines)
                     <tr>
                     <td>{{$medicines->medicine_type_id}}</td>
                         <td>{!! str_limit($medicines->medicine_type_name,60) !!}</td>
-                        <td>image</td>
-                        <td>{!! $medicines->created_at !!}</td>
                         <td>
+                            <img src="/{{ $medicines->image}}" style="height:90px; width:90px;">
+                        </td>
+                        <td>{!! $medicines->created_at !!}</td>
+                        
+                          <td> 
+                            <form action="{{url('/updatemedicinetype',$medicines->medicine_type_id)}}" method="POST">
+                            {{ csrf_field() }} 
+                                {!! method_field('GET') !!}
+                                
+                                <button type="submit" name="edit" class="btn btn-primary btn-sm"> Edit</button>
+                            </form>
+
+                            <!-- <a href="{!!url('/updatemedicinetype',$medicines->medicine_type_id)!!}" type="button" class="btn btn-primary btn-md">Edit</a> -->
                             
-                            <form action="" method="POST">
+                        </td>
+                        <td><form action="{{url('/addmedicinetype',$medicines->medicine_type_id)}}" method="POST">
                             {{ csrf_field() }} 
                                 {!! method_field('DELETE') !!}
                                 
-                                <button type="submit" name="edit" class="btn btn-primary btn-sm"> Edit</button>
-                                <button type="submit"name="delete" class="btn btn-danger btn-sm"> Delete</button>
-                            </form>
-                        </td>
-                    </tr>
+                                <button type="submit" name="delete" class="btn btn-danger btn-sm"> Delete</button>
+                            </form></td>
+                    </tr> 
                 @endforeach
             @else
                 <tr>
@@ -268,6 +313,29 @@
         </div>
 
     </div>
+
+    <script>
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>

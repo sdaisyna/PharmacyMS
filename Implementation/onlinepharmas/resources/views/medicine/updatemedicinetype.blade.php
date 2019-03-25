@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head> 
+<head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,13 +36,13 @@
 </head>
 
 <body class="animsition">
-
+    <div class="page-wrapper">
         <!-- HEADER MOBILE-->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <a class="logo" href="/admindash">
+                        <a class="logo" href="index.html">
                             <img src="images/icon/logo.png" alt="Admin" />
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
@@ -57,7 +57,7 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="/pharmacistPanel">
+                            <a class="js-arrow" href="profile.html">
                                 <i class="fas fa-user"></i>Pharmacist Panel</a>
 
                         </li>
@@ -70,16 +70,16 @@
                                 <i class="fas fa-calendar-alt"></i>Categories</a>
                         </li>
                         <li>
-                            <a href="map.html">
+                            <a href="order.html">
                                 <i class="fas fa-map-marker-alt"></i>Order list</a>
                         </li>
 
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="stock.html">
                                 <i class="fas fa-desktop"></i>Stock</a>
                         </li>
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="help.html">
                                 <i class="fas fa-question"></i>Help</a>
                         </li>
                     </ul>
@@ -89,9 +89,9 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block" >
+        <aside class="menu-sidebar d-none d-lg-block bg-light">
             <div class="logo">
-                <a href="/admindash">
+                <a href="#">
                     <img src="images/icon/logo.png" alt="Cool Admin" />
                 </a>
             </div>
@@ -99,7 +99,7 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                       <li class="has-sub">
-                          <a class="js-arrow" href="/pharmacistPanel">
+                          <a class="js-arrow" href="chart.html">
                               <i class="fas fa-user"></i>Pharmacist Panel</a>
 
                       </li>
@@ -112,16 +112,16 @@
                               <i class="fas fa-calendar-alt"></i>Categories</a>
                       </li>
                       <li>
-                          <a href="map.html">
+                          <a href="order.html">
                               <i class="fas fa-map-marker-alt"></i>Order list</a>
                       </li>
 
                       <li class="has-sub">
-                          <a class="js-arrow" href="#">
+                          <a class="js-arrow" href="stock.html">
                               <i class="fas fa-desktop"></i>Stock</a>
                       </li>
                       <li class="has-sub">
-                          <a class="js-arrow" href="#">
+                          <a class="js-arrow" href="help.html">
                               <i class="fas fa-question"></i>Help</a>
                       </li>
                     </ul>
@@ -154,13 +154,8 @@
                                             <div class="account-dropdown__body">
 
                                             <div class="account-dropdown__footer">
-                                            <a href="{{ route('logout')}}"
-                                                     onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();"><i class="zmdi zmdi-power"></i>Logout</a></a>
-                                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                    {{@csrf_field()}}
-                                                 </form>
-                                                    
+                                                <a href="#">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
                                             </div>
                                         </div>
                                     </div>
@@ -173,13 +168,13 @@
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
-                        <div class="main-content">
+            <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="overview-wrap">
-                                    <h2 class="title-1">Your Profile !</h2>
+                                    <h2 class="title-1">Welcome to category dashboard !</h2>
 
                                 </div>
                             </div>
@@ -188,121 +183,81 @@
                           <div class="col-12">
                           <div class="jumbotron">
                             <div class="col-sm-10">
-                                    <form class="form-horizontal" method="POST" action="{!!url('/updateprofile', Auth::user()->id)!!}" enctype="multipart/form-data" >
-        {{ csrf_field() }} 
-                        {!!method_field('put')!!}
-                        <!-- session create gareko Csrf le chai  -->
-        <!-- fullname -->
-        <div class="form-group input-group{{ $errors->has('name') ? ' has-error' : '' }}">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-             </div>
-            <input name="name" class="form-control" type="text" value="{!!(Auth::user()->name)!!}" required>
-            @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-        </div>
+                              <form action="{{url('/editmedicinetype',$medicinetype->medicine_type_id)}}" method="post" enctype="multipart/form-data">
+                              {{ csrf_field() }} 
+                              {{method_field('put')}}
+                                  <input type="hidden" name="size" value="1000000">
+                      		  <div class="form-group">
+                                <label for="category"><i class="fa fa-product"></i> Medicine category :</label>
+                      		  <input  type="text" class="form-control" value="{!!$medicinetype->medicine_type_name!!}"  name="category_name" required>
+                      		</div>
 
 
-<!--      Email -->
 
-        <div class="form-group input-group{{ $errors->has('email') ? ' has-error' : '' }}">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-             </div>
-            <input  name="email" class="form-control" type="email" value="{!!(Auth::user()->email)!!}" required>
-            @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-        </div>
-
-
-<!-- Address -->
-        <div class="form-group input-group{{ $errors->has('address') ? ' has-error' : '' }}">
-          <div class="input-group-prepend">
-              <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
-           </div>
-              <input name="address" class="form-control" type="text" value="{!!(Auth::user()->address)!!}" required autofocus>
-              @if ($errors->has('address'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('address') }}</strong>
-                                    </span>
-                                @endif
-          </div>
-
-
-          <!-- Gender -->
-
-<div class="form-group row">
-              <label class="col-sm-3 font-weight-bold text-secondary">Gender: </label>
-              <div class="col-sm-8">
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optMale" value="Male" @if(Auth::user()->gender == 'Male') checked="checked" @endif >
-                      <label class="form-check-label" for="optMale">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optFemale" value="Female" @if(Auth::user()->gender == 'Female') checked="checked" @endif>
-                      <label class="form-check-label" for="optFemale">Female</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                      <input class="form-check-input" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="sex" id="optOthers" value="Others" @if(Auth::user()->gender == 'Others') checked="checked" @endif>
-                      <label class="form-check-label" for="optOthers">Others</label>
-                  </div>
-
-                  @if ($errors->has('gender'))
+                          <div class="form-group">
+            <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
+              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required onchange="PreviewImage()">
+              @if ($errors->has('image'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('gender') }}</strong>
+                                        <strong>{{ $errors->first('image') }}</strong>
                                     </span>
+                                    <img id="uploadPreview" src="/{{$medicinetype->image}}" style="height: 150px;width: 150px;" class="img-fluid img-thumbnail" style="max-width: 100%;" >
                                 @endif
-              </div>
+                              
+
+                                <script type="text/javascript">
+
+                function PreviewImage() {
+                    var oFReader = new FileReader();
+                    oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+                    oFReader.onload = function (oFREvent) {
+                        document.getElementById("uploadPreview").src = oFREvent.target.result;
+                    };
+                };
+
+            </script>
+         
+        
+            </div> 
+
+            <div class="form-group">
+              <img src="/{{$medicinetype->image}}" style="height: 200px;width: 280px;" class="img-fluid img-thumbnail" style="max-width: 100%;" >
+              
             </div>
 
-          <!-- Phone number// -->
-        <div class="form-group input-group{{ $errors->has('phone_no') ? ' has-error' : '' }}">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+
+                             <div class="row">
+                                <div class="col-md-6">
+                                <div class="col-md-offset-4">
+                                    <input type="submit" name="update" class="btn btn-success form-control" value="Update">
+                                  </div>
+                                </div>
+                            
+                      	   </div>
+
+                      	</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
-            <label class="custom-select" style="max-width: 120px;">+977</label>
-            <input  name="phone_no" class="form-control" type="text" value="{!!(Auth::user()->phone_no)!!}" required autofocus>
-            @if ($errors->has('phone_no'))
-                                    <span class="help-block">
-                                    </span>
-                                @endif
-        </div>
-
-
-        <!-- Create account button// -->
-        <div class="form-group">
-            <button type="submit" name="update" class="btn btn-success btn-block">Update my profile  </button>
-        </div>
-
-
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
         </div>
 
     </div>
 
-            <script>
-      var msg = '{{Session::get('success')}}';
-      var exist = '{{Session::has('success')}}';
-      if(exist)
-      {
-        alert(msg);
-      }
-</script>
 
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
@@ -328,7 +283,16 @@
     <!-- Main JS-->
     <script src="js/main.js"></script>
 
+    <script>
+      var msg = '{{Session::get('success')}}';
+      var exist = '{{Session::has('success')}}';
+      if(exist)
+      {
+        alert(msg);
+      }
+</script>
+
 </body>
 
-</html> 
+</html>
 <!-- end document-->

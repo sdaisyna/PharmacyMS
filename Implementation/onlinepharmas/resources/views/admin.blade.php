@@ -57,16 +57,16 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li class="has-sub">
-                            <a class="js-arrow" href="pharmacist.php">
+                            <a class="js-arrow" href="/pharmacistPanel">
                                 <i class="fas fa-user"></i>Pharmacist Panel</a>
 
                         </li>
                         <li>
-                            <a href="medicine.html">
+                            <a href="/addmedicine">
                                 <i class="fas fa-pills"></i>Medicine</a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/addmedicinetype">
                                 <i class="fas fa-calendar-alt"></i>Categories</a>
                         </li>
                         <li>
@@ -104,11 +104,11 @@
 
                       </li>
                       <li>
-                          <a href="medicine.html">
+                          <a href="/addmedicine">
                               <i class="fas fa-pills"></i>Medicine</a>
                       </li>
                       <li>
-                          <a href="#">
+                          <a href="/addmedicinetype">
                               <i class="fas fa-calendar-alt"></i>Categories</a>
                       </li>
                       <li>

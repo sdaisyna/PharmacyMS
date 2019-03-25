@@ -58,7 +58,7 @@
                         </div>
                         <div class="content-area">
                             <div class="doctor-name text-center">
-                                <a href="medicine.php"><h3>Prescriptions</h3></a>
+                                <a href="/medicine"><h3>Prescriptions</h3></a>
                                 <h6>Cure your disease</h6>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                         </div>
                         <div class="content-area">
                             <div class="doctor-name text-center">
-                                <a href="medicine.php"><h3>Personal care</h3></a>
+                                <a href="/medicine"><h3>Personal care</h3></a>
                                 <h6>Be healthy and wealthy</h6>
                             </div>
                         </div>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="content-area">
                             <div class="doctor-name text-center">
-                              <a href="medicine.php">  <h3>First aid kit</h3></a>
+                              <a href="/medicine">  <h3>First aid kit</h3></a>
                                 <h6>we believe in keeping you safe</h6>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                         </div>
                         <div class="content-area">
                             <div class="doctor-name text-center">
-                                <h3>self medication</h3>
+                                <a href="/medicine">  <h3>Self medication</h3></a>
                                 <h6>be first doctor of your health</h6>
                             </div>
                         </div>

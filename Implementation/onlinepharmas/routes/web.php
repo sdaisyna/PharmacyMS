@@ -64,8 +64,12 @@ Route:: group(['middleware'=>'admin'],function(){
     Route::get('/pharmacistPanel/{id}','PharmacistProfileController@edit');
 Route::put('/updateprofile/{id}','PharmacistProfileController@update');//yo chai update garya 
 
-});
 
+//insert medicine type
+
+
+});
+ 
 
 //insert medicine
 Route::get('/addmedicinetype', function (){
@@ -76,14 +80,33 @@ Route::get('/addmedicine','InsertMedicineController@create');
 
 Route::post('/insertmedicine','InsertMedicineController@store');
 
-//insert medicine type
+Route::get('/addmedicine','InsertMedicineController@getMedicineType');
+Route::delete('/addmedicine/{id}','InsertMedicineController@destroy');//delete
+
+//update medicinetype
+Route::get('/updatemedicinetype/{id}','InsertMedicineTypeController@edit');
+
+//update medicine
+Route::get('/updatemedicine/{id}','InsertMedicineController@edit');
+Route::get('/updatemedicine','InsertMedicineController@getMedicineTypeUpdate');
+Route::put('/editmedicinetype/{id}','InsertMedicineTypeController@update');
+
+
+
 Route::post('/insertmedicinetype','InsertMedicineTypeController@store');
 Route::get('/addmedicinetype','InsertMedicineTypeController@index');
-
-
+Route::get('/addmedicinetype/{id}','InsertMedicineController@create');
+Route::delete('/addmedicinetype/{id}','InsertMedicineTypeController@destroy');//delete
+ 
 
 //Contact 
 Route::post('/gocontactinfo','ContactController@store'); //form ma call gareko route
+
+
+Route::get('medicine', 'InsertMedicineTypeController@medcategory');//fetching of medicine type
+
+Route::get('medicine', 'InsertMedicineController@allmedicine');
+
 
 
 
