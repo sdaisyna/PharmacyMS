@@ -216,7 +216,7 @@
 
                     oFReader.onload = function (oFREvent) {
                         document.getElementById("uploadPreview").src = oFREvent.target.result;
-                    };
+                    }; 
                 };
 
             </script>
@@ -226,16 +226,13 @@
             </div> 
 
 
-                             <div class="row">
-                                <div class="col-md-6">
-                               
-                                  <input type="submit" name="add" class="btn btn-success form-control" value="Add">
-                                 </div>
-                                
-                            
-                      	   </div>
+<div class="row">
+    <div class="col-md-6">
+        <input type="submit" name="add" class="btn btn-success form-control" value="Add">
+    </div>
+</div>
 
-                      	</form>
+</form>
 </div>
 </div>
 </div>
@@ -282,14 +279,13 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
                                 <button type="submit" name="edit" class="btn btn-primary btn-sm"> Edit</button>
                             </form>
 
-                            <!-- <a href="{!!url('/updatemedicinetype',$medicines->medicine_type_id)!!}" type="button" class="btn btn-primary btn-md">Edit</a> -->
                             
                         </td>
                         <td><form action="{{url('/addmedicinetype',$medicines->medicine_type_id)}}" method="POST">
                             {{ csrf_field() }} 
                                 {!! method_field('DELETE') !!}
                                 
-                                <button type="submit" name="delete" class="btn btn-danger btn-sm"> Delete</button>
+                                <button onclick="if (!confirm('Are you sure to delete this category?')) { return false }" type="submit" name="delete" class="btn btn-danger btn-sm"> Delete</button>
                             </form></td>
                     </tr> 
                 @endforeach

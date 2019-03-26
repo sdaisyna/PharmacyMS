@@ -168,58 +168,53 @@
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">Welcome to category dashboard !</h2>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-25">
-                          <div class="col-12">
-                          <div class="jumbotron">
-                            <div class="col-sm-10">
-                              <form action="{{url('/editmedicinetype',$medicinetype->medicine_type_id)}}" method="post" enctype="multipart/form-data">
-                              {{ csrf_field() }} 
-                              {{method_field('put')}}
-                                  <input type="hidden" name="size" value="1000000">
-                      		  <div class="form-group">
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap">
+                        <h2 class="title-1">Welcome to category dashboard !</h2>
+                     </div>
+                </div>
+            </div>
+        <div class="row m-t-25">
+            <div class="col-12">
+                <div class="jumbotron">
+                    <div class="col-sm-10">
+                         <form action="{{url('insertmedicinetype',$medicinetype->medicine_type_id)}}" method="post" enctype="multipart/form-data">
+                        {{ csrf_field() }} 
+                        {{method_field('put')}}
+                            <input type="hidden" name="size" value="1000000">
+                      		<div class="form-group">
                                 <label for="category"><i class="fa fa-product"></i> Medicine category :</label>
                       		  <input  type="text" class="form-control" value="{!!$medicinetype->medicine_type_name!!}"  name="category_name" required>
-                      		</div>
+                      		</div> 
 
 
-
-                          <div class="form-group">
-            <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
-              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required onchange="PreviewImage()">
+<div class="form-group">
+    <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
+        <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required onchange="PreviewImage()">
               @if ($errors->has('image'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('image') }}</strong>
-                                    </span>
-                                    <img id="uploadPreview" src="/{{$medicinetype->image}}" style="height: 150px;width: 150px;" class="img-fluid img-thumbnail" style="max-width: 100%;" >
-                                @endif
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $errors->first('image') }}</strong>
+                </span>
+        <img id="uploadPreview" src="/{{$medicinetype->image}}" style="height: 150px;width: 150px;" class="img-fluid img-thumbnail" style="max-width: 100%;" >
+                @endif
                               
-
-                                <script type="text/javascript">
-
+        <script type="text/javascript">
                 function PreviewImage() {
-                    var oFReader = new FileReader();
-                    oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
-
-                    oFReader.onload = function (oFREvent) {
-                        document.getElementById("uploadPreview").src = oFREvent.target.result;
+                var oFReader = new FileReader();
+                oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+                oFReader.onload = function (oFREvent) {
+                document.getElementById("uploadPreview").src = oFREvent.target.result;
                     };
                 };
 
-            </script>
+        </script>
          
         
-            </div> 
+</div> 
 
             <div class="form-group">
               <img src="/{{$medicinetype->image}}" style="height: 200px;width: 280px;" class="img-fluid img-thumbnail" style="max-width: 100%;" >

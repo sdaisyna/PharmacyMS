@@ -26,17 +26,36 @@
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
             <div id="logo">
-                <a href="index.html"><img src="assets/images/logo/logo.png" alt="logo.png"  /></a>
+                <a href="/"><img src="assets/images/logo/logo.png" alt="logo.png"  /></a>
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
                     <li class="menu-active"><a href="/">Home</a></li>
                     <li><a href="/medicine">Medicine</a></li>
-                    <li><a href="/features">Features</a></li>
+                    <li><a href="/cart">Cart</a></li>
                     <li><a href="/contact">Contact</a></li>
+
+                    @guest
                     <li><a href="/login"><span><i></i>Login</span></a></li>
                     <li><abbr title="help" ><a href="/help"><span><i class="fa fa-question"></i></span></a></abbr></li>
+                    @else
+                    <li>
+                    <a href="{{ route('logout')}}"
 
+                 onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">LogoUT
+            </a>
+        </li>
+                    <li class="menu-has-children"><a href=""><i class="fa fa-user"></i></a>
+                        <ul>
+                            <li><a href="/editprofile">Profile</a></li>
+                            <li><a href="blog-details.html">Reset password</a></li>
+                        </ul>
+                    </li>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    {{@csrf_field()}}
+                 </form>            
+                    @endguest
                 </ul>
             </nav><!-- #nav-menu-container -->
             </div>

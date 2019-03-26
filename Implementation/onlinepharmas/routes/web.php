@@ -19,8 +19,8 @@ Route::get('/medicine', function () {
     return view('medicine');
 });//->middleware('auth'); //restrict page without login
 
-Route::get('/features', function () {
-    return view('features');
+Route::get('/cart', function () {
+    return view('cart');
 });
 
 Route::get('/contact', function () {
@@ -70,6 +70,8 @@ Route::put('/updateprofile/{id}','PharmacistProfileController@update');//yo chai
 
 });
  
+ 
+
 
 //insert medicine
 Route::get('/addmedicinetype', function (){
@@ -85,17 +87,18 @@ Route::delete('/addmedicine/{id}','InsertMedicineController@destroy');//delete
 
 //update medicinetype
 Route::get('/updatemedicinetype/{id}','InsertMedicineTypeController@edit');
+Route::put('insertmedicinetype/{id}','InsertMedicineTypeController@update');
 
 //update medicine
 Route::get('/updatemedicine/{id}','InsertMedicineController@edit');
-Route::get('/updatemedicine','InsertMedicineController@getMedicineTypeUpdate');
-Route::put('/editmedicinetype/{id}','InsertMedicineTypeController@update');
+Route::put('insertmedicine/{id}','InsertMedicineController@update');
 
 
-
+//insert medicinetype
+Route::get('/addmedicinetype/{id}','InsertMedicineController@create');
 Route::post('/insertmedicinetype','InsertMedicineTypeController@store');
 Route::get('/addmedicinetype','InsertMedicineTypeController@index');
-Route::get('/addmedicinetype/{id}','InsertMedicineController@create');
+
 Route::delete('/addmedicinetype/{id}','InsertMedicineTypeController@destroy');//delete
  
 
@@ -105,12 +108,14 @@ Route::post('/gocontactinfo','ContactController@store'); //form ma call gareko r
 
 Route::get('medicine', 'InsertMedicineTypeController@medcategory');//fetching of medicine type
 
-Route::get('medicine', 'InsertMedicineController@allmedicine');
+
 
 
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/cart','CartController@viewcart');
 
 
 

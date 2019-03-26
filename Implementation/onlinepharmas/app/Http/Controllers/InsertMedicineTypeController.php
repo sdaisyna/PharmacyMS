@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\MedicineType;
+use App\Medicine;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\DB;
 
@@ -143,6 +144,12 @@ class InsertMedicineTypeController extends Controller
     {
         $medicinetype=new MedicineType();
         $medicinetype=$medicinetype->get();
-        return view('medicine',['medicinetype'=>$medicinetype]);
+
+        $medicine=new Medicine();
+        $medicine=$medicine->get();
+
+
+
+        return view('medicine',compact('medicinetype','medicine'));
     }
 }

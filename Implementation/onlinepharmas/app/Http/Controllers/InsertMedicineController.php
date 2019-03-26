@@ -98,7 +98,12 @@ class InsertMedicineController extends Controller
     public function edit($id)
     {
          $medicine=Medicine::find($id);
-        return view('medicine.updatemedicine')->with('medicine',$medicine); 
+
+         $medicinetype = new MedicineType();
+        $medicinetype = $medicinetype->get();
+        return view('medicine.updatemedicine',['medicine'=>$medicine],[
+            'medicinetype'=>$medicinetype]);
+        //return view('medicine.updatemedicine')->with('medicine',$medicine); 
     }
 
     /**
@@ -110,7 +115,40 @@ class InsertMedicineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $medicine=Medicine::find($id);
+        if($request->hasFile('image'))
+        {
+            $pictureInfo=$request->file('image');
+            $name=$pictureInfo->getClientOriginalName();
+            $folder="itemImages/";
+            $pictureInfo->move($folder,$name);
+            $picUrl=$folder.$name;
+
+        
+            $medicine->medicine_name=$request->medicine_name;
+            $medicine->medicine_type_id=$request->medicine_type_name;
+            $medicine->description=$request->description;
+            $medicine->rate=$request->rate;
+            $medicine->image=$picUrl;
+            $medicine->manufacture_date=$request->manufacture_date;
+            $medicine->expiry_date=$request->expiry_date;
+            
+            $medicine->save();
+        }
+
+        else
+        {
+            $medicine->medicine_name=$request->medicine_name;
+            $medicine->medicine_type_id=$request->medicine_type_name;
+            $medicine->description=$request->description;
+            $medicine->rate=$request->rate;
+            $medicine->manufacture_date=$request->manufacture_date;
+            $medicine->expiry_date=$request->expiry_date;
+
+            $medicine->save();
+
+        }
+        return redirect()->to('/addmedicine');
     }
 
     /**
@@ -140,22 +178,5 @@ class InsertMedicineController extends Controller
         return view('medicine.insertmedicine',compact('medicinetype','medicine'));
     }
 
-       public function getMedicineTypeUpdate()
-    {
-        $medicinetype = new MedicineType();
-        $medicinetype = $medicinetype->get();
 
-        $medicine = DB::table('medicine')
-        ->join('medicine_type','medicine_type.medicine_type_id','=','medicine.medicine_type_id')  
-        ->select('medicine_type.*','medicine.*') 
-        ->get();     
-        return view('medicine.updatemedicine',compact('medicinetype','medicine'));
-    }
-
-     public function allmedicine()
-    {
-        $medicine=new Medicine();
-        $medicine=$medicine->get();
-        return view('medicine',['medicine'=>$medicine]);
-    }
 }

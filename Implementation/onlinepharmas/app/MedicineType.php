@@ -10,5 +10,5 @@ class MedicineType extends Model
 
     protected $primaryKey="medicine_type_id"; 
 
-    protected $fillable=['medicine_type_name','image',];
+    protected $fillable=['medicine_type_name','image',]; 
 }

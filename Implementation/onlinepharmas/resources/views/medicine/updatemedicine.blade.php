@@ -165,85 +165,106 @@
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
-            <div class="main-content">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">Welcome to medicine Dashboard! </h2>
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap">
+                        <h2 class="title-1">Welcome to medicine Dashboard! </h2>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-25">
-                          <div class="col-12">
-                          <div class="jumbotron">
-                            <div class="col-sm-8">
+                    </div>
+                </div>
+                </div>
 
 
-   <form method="POST" action="{!! url('/insertmedicine') !!}" enctype="multipart/form-data">
+
+    <div class="row m-t-25">
+        <div class="col-12">
+            <div class="jumbotron">
+                <div class="col-sm-8">
+
+   <form method="POST" action="{{url('insertmedicine',$medicine->medicine_id)}}" enctype="multipart/form-data">
    {{ csrf_field() }} 
+   {{method_field('put')}}
      <input type="hidden" name="size" value="1000000">
 <div class="form-group">
          <label for="medicine name"><i class="fa fa-pills"></i> Medicine name :</label>
-     <input class="form-control" name="medicine_name" >
+     <input class="form-control" name="medicine_name" value="{!!$medicine->medicine_name!!}"">
 </div>
+
+
 
 <div class="form-group">
   <label for="medicine_category"><i class="fa fa-pills"></i> Medicine category :</label>
   <br>
-  <select class="col-sm-12" name="medicine_type_name">
-  @foreach($medicinetype as $medType)
-           <option value={{ $medType->medicine_type_id }}>{{$medType->medicine_type_name}}</option>
-           @endforeach
-
-
-</select>
+  <select class="col-sm-12" name="medicine_type_name" required>
+@foreach($medicinetype as $medicinetypes)
+    <option value="{{$medicinetypes->medicine_type_id}}">{{$medicinetypes->medicine_type_name}}</option>
+@endforeach
+  </select>
 </div>  
 
 
-     <div class="form-group">
-       <label for="desciption"><i class="fa fa-sticky-note"></i>Description :</label>
-       <textarea class="form-control" name="description" rows="4">
-</textarea>
+<div class="form-group">
+    <label for="desciption"><i class="fa fa-sticky-note"></i>Description :</label>
+    <textarea class="form-control" name="description" rows="4" >
+       {!!$medicine->description!!}
+    </textarea>
 </div>
+
 <div class="form-group">
      <label for=" price"><i class="fa fa-dollar"></i>  Price :</label>
-     <input type="form-control" name="rate" class="form-control" >
+     <input type="form-control" name="rate" class="form-control" value="{!!$medicine->rate!!}" >
      </div>
 
 <!-- image -->
-                          <div class="form-group">
-            <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
-              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required>
-              @if ($errors->has('image'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('image') }}</strong>
-                                    </span>
-                                @endif
-         
-        
-            </div>
+<div class="form-group">
+    <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
+    <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required>
+        @if ($errors->has('image'))
+            <span class="invalid-feedback" role="alert">
+               <strong>{{ $errors->first('image') }}</strong>
+            </span>
+     <img id="uploadPreview" src="/{{$medicine->image}}" style="height: 150px;width: 150px;" class="img-fluid img-thumbnail" style="max-width: 100%;" >
+        @endif   
+
+ <script type="text/javascript">
+
+     function PreviewImage() {
+     var oFReader = new FileReader();
+     oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+     oFReader.onload = function (oFREvent) {
+     document.getElementById("uploadPreview").src = oFREvent.target.result;
+                    };
+                };
+
+</script>    
+</div>
+
+<div class="form-group">
+    <img src=" /{{$medicine->image}} "  height="150px" width="150px"  class="img-fluid img-thumbnail" style="max-width:100%">
+</div>
+ 
 
 <div class="form-group">
      <label for=" manufacture date"><i class="fa fa-calendar"></i>  Manufactured date :</label>
-     <input type="date" name="manufacture_date" class="form-control" >
-     </div>
+     <input type="date" name="manufacture_date" class="form-control" value="{!!$medicine->manufacture_date!!}">
+</div>
 
 <div class="form-group">
      <label for=" expiry date"><i class="fa fa-calendar"></i>  Expiry date :</label>
-     <input type="date" name="expiry_date" class="form-control" >
-     </div>
+     <input type="date" name="expiry_date" class="form-control" value="{!!$medicine->expiry_date!!}"> 
+</div>
 
 
 
 
 <div class="row">
    <div class="col-md-6">
-<input type="submit" name="update" class="btn btn-info form-control" value="UPDATE">
+     <input type="submit" name="update" class="btn btn-info form-control" value="UPDATE">
    </div>
- </div>
+</div>
 </form>
  
 </div>

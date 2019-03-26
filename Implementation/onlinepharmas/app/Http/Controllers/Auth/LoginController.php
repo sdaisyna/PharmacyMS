@@ -38,7 +38,7 @@ public function redirectTo()
         return '/admindash';
         break;
         case '2':
-        return '/home';
+        return '/';
         default:
         return 'welcome';
         break;
