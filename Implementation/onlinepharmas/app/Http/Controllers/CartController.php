@@ -12,11 +12,22 @@ class CartController extends Controller
   
 	public function create(Request $request,$id)
 	{
-	   $cart =new Cart;
-	   $cart->medicine_id=$id;
-	   $cart->user_id=$request->user_id;
-	   $cart->save();
-	   return redirect()->back()->with('passed','Your medicine is added to cart !');
+		//using eloquent(it uses model to find the database instead from DB)
+	   $duplicate_medicine=Cart::where('medicine_id',$request->id)->where('user_id',$request->user_id)->count();
+	   if($duplicate_medicine>0)
+	   {
+		   return back()->with('message','Medicine already added !');
+
+	   }
+	   else
+	   {
+		$cart =new Cart;
+		$cart->medicine_id=$id;
+		$cart->user_id=$request->user_id;
+		$cart->save();
+		return redirect()->back()->with('passed','Your medicine is added to cart !');
+	   }  
+	   
 	}
 
 	public function show(Cart $cart)

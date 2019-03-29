@@ -257,6 +257,11 @@
      <input type="date" name="expiry_date" class="form-control" value="{!!$medicine->expiry_date!!}"> 
 </div>
 
+<div class="form-group">
+     <label for=" qty"><i class="fa fa-sorts-numeric-asc"></i>  Quantity :</label>
+     <input type="form-control" name="qty" class="form-control" value="{!!$medicine->quantity!!}" >
+</div>
+
 
 
 

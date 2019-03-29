@@ -71,6 +71,7 @@ class InsertMedicineController extends Controller
         $medicine->image=$picUrl;
         $medicine->manufacture_date=$form_req['manufacture_date'];
         $medicine->expiry_date=$form_req['expiry_date'];  
+        $medicine->quantity=$form_req['qty']; 
         $status=$medicine->save();
         return redirect()->to('/addmedicine');
 
@@ -132,6 +133,8 @@ class InsertMedicineController extends Controller
             $medicine->image=$picUrl;
             $medicine->manufacture_date=$request->manufacture_date;
             $medicine->expiry_date=$request->expiry_date;
+            $medicine->quantity=$request->qty;
+
             
             $medicine->save();
         }
@@ -144,6 +147,7 @@ class InsertMedicineController extends Controller
             $medicine->rate=$request->rate;
             $medicine->manufacture_date=$request->manufacture_date;
             $medicine->expiry_date=$request->expiry_date;
+            $medicine->quantity=$request->qty;
 
             $medicine->save();
 

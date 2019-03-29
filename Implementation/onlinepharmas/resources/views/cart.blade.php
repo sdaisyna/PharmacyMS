@@ -12,22 +12,23 @@
             </div>
         </div>
     </div>
-</section>
+</section> 
 <!-- Banner Area End -->
 
-
+<br>
+<br>
 
 <div class="container">
-        <h2>List of medicine</h2>
+
         <div class="row" >
 <div class="col-md-4">
 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search medicine"
 style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);">
 </div>
 </div>
-        <table class="table table-bordered" id="myTable">
-            <thead>
-            <tr>
+        <table class="table" id="myTable">
+            <thead class="bg-dark" >
+            <tr class="text-light">
                 <th>Image</th>
                 <th>Medicine</th>
                 <th>Rate</th>
@@ -37,6 +38,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
             </tr>
             </thead>
             <tbody> 
+            @if($addtocart->count()>0)
                 @foreach($addtocart as $addtocarts)
                     <tr>
                     <td>
@@ -47,6 +49,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
 
                     <td>{!! str_limit($addtocarts->rate,2200) !!}</td>
                     <td></td>
+                    <td></td>
                         <td><form action="{{url('/cart',$addtocarts->cart_id)}}" method="POST">
                             {{ csrf_field() }} 
                                 {!! method_field('DELETE') !!}
@@ -55,7 +58,11 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
                             </form></td>
                     </tr> 
                 @endforeach
+         @else
          
+         <h1 class="text-center">Your cart is empty !!</h1>
+         
+         @endif
             </tbody>
         </table>
     </div>

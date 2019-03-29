@@ -21,6 +21,7 @@ class CreateMedicineTable extends Migration
             $table->string('image');
             $table->date('manufacture_date');
             $table->date('expiry_date');
+            $table->integer('quantity');
             $table->integer('medicine_type_id')->unsigned();
             $table->foreign('medicine_type_id')->references('medicine_type_id')->on('medicine_type');
 

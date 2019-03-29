@@ -235,9 +235,12 @@
 <div class="form-group">
      <label for=" expiry date"><i class="fa fa-calendar"></i>  Expiry date :</label>
      <input type="date" name="expiry_date" class="form-control" >
-     </div>
+</div>
 
-
+<div class="form-group">
+     <label for=" qty"><i class="fa fa-sorts-numeric-asc"></i>  Quantity :</label>
+     <input type="form-control" name="qty" class="form-control" >
+</div>
 
 
 <div class="row">
@@ -269,6 +272,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
                 <th>Medicine name</th>
                 <th>Medicine type</th>
                 <th>Rate</th>
+                <th>Quantity</th>
                 <th>Image</th>
                 <th>Action</th>
             </tr>
@@ -307,6 +311,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
                         <td>{!! str_limit($medicines->medicine_type_name,2600) !!}</td>
                      
                         <td>{!! str_limit($medicines->rate,2200) !!}</td>
+                        <td>{!! str_limit($medicines->quantity,2200) !!}</td>
                         <td>
                             <img src="/{{ $medicines->image}}" style="height:90px; width:90px;">
                         </td>
