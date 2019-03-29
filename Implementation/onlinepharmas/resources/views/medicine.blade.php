@@ -1,7 +1,14 @@
 @extends('layouts.app')
 @section('title')@stop 
 @section('content')
-
+<script>
+      var msg = '{{Session::get('loginFirst')}}';
+      var exist = '{{Session::has('loginFirst')}}';
+      if(exist)
+      {
+        alert(msg);
+      }
+</script>
 <!-- Banner Area Starts -->
 <section class="banner-area other-page">
     <div class="container">
@@ -70,7 +77,7 @@
                 <div class="container">
                     <div class="row">
                         @foreach($medicine as $medicines)
-                            <div class="col-md-6"  >
+                            <div class="col-md-6"  > 
                             <div class="text-center shadow bg-white" style=" padding:2rem; margin:2rem 2rem">
                                 <img src="{!! $medicines->image!!}" height="120px;">
                                     <h3>{!! $medicines->medicine_name!!}</h3>
@@ -133,6 +140,8 @@
         </div>
         </div>
 </section>
+
+
     <!-- Specialist Area Starts -->
 
 @endsection

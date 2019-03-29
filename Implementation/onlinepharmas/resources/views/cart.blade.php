@@ -47,7 +47,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
 
                     <td>{!! str_limit($addtocarts->rate,2200) !!}</td>
                     <td></td>
-                        <td><form action="{{url('/cart',$addtocarts->id)}}" method="POST">
+                        <td><form action="{{url('/cart',$addtocarts->cart_id)}}" method="POST">
                             {{ csrf_field() }} 
                                 {!! method_field('DELETE') !!}
                                 

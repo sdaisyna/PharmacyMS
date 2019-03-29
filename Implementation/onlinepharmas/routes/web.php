@@ -112,15 +112,16 @@ Route::post('/gocontactinfo','ContactController@store'); //form ma call gareko r
 Route::get('medicine', 'InsertMedicineTypeController@medcategory');//fetching of medicine type
 
 
+//medicine adding to cart
+Route::get('/cart','CartController@show')->middleware('auth');
 
+Route::post('/cart/{id}','CartController@create')->middleware('auth');
+Route::delete('/cart/{id}','CartController@destroy');//delete
 
 
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/cart','CartController@viewcart');
-
-Route::post('/cart/{id}','CartController@create');
 
 
 

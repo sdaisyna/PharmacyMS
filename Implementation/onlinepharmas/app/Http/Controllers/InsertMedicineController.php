@@ -162,7 +162,7 @@ class InsertMedicineController extends Controller
         $medicine=Medicine::find($id);
 
          $medicine->delete();
-            return redirect()->to('/addmedicine')->withSuccess('Medicine deleted successfully !');
+        return redirect()->to('/addmedicine')->withSuccess('Medicine deleted successfully !');
     }
 
     

@@ -261,7 +261,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
             </tr>
             </thead>
             <tbody> 
-            @if($medicine->count())
+            @if($medicine->count()>0)
                 @foreach($medicine as $medicines)
                     <tr>
                     <td>{{$medicines->medicine_type_id}}</td>
@@ -281,7 +281,8 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
 
                             
                         </td>
-                        <td><form action="{{url('/addmedicinetype',$medicines->medicine_type_id)}}" method="POST">
+                        <td>
+                        <form action="{{url('/addmedicinetype',$medicines->medicine_type_id)}}" method="POST">
                             {{ csrf_field() }} 
                                 {!! method_field('DELETE') !!}
                                 

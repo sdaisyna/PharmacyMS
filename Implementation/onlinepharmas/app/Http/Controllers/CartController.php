@@ -9,20 +9,7 @@ use App\Cart;
 
 class CartController extends Controller
 {
-    public function viewcart()
-    {
-    	if(Auth::check())
-        
-    	{
-
-          return view('cart');
-    	}
-    	else
-    	{
-    		return view('auth.login');
-    	}
-	}
-	
+  
 	public function create(Request $request,$id)
 	{
 	   $cart =new Cart;
@@ -47,4 +34,12 @@ class CartController extends Controller
 
 		return view('/cart',compact('addtocart','total'));
 	}
+
+	public function destroy($id)
+    {
+        $cart=Cart::find($id);
+
+         $cart->delete();
+        return redirect()->to('/cart');
+    }
 }
