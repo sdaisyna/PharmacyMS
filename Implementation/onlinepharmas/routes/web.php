@@ -59,6 +59,9 @@ Route:: group(['middleware'=>'admin'],function(){
 
     Route::get('/pharmacistPanel', function () {
         return view('medicine.pharmacistpanel');
+
+    
+    
     }); 
 
     Route::get('/pharmacistPanel/{id}','PharmacistProfileController@edit');
@@ -82,7 +85,7 @@ Route::get('/addmedicine','InsertMedicineController@create');
 
 Route::post('/insertmedicine','InsertMedicineController@store');
 
-Route::get('/addmedicine','InsertMedicineController@getMedicineType');
+Route::get('/addmedicine','InsertMedicineController@getMedicineType');//fetching in combo box
 Route::delete('/addmedicine/{id}','InsertMedicineController@destroy');//delete
 
 //update medicinetype
@@ -116,6 +119,10 @@ Route::get('medicine', 'InsertMedicineTypeController@medcategory');//fetching of
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/cart','CartController@viewcart');
+
+Route::post('/cart/{id}','CartController@create');
+
+
 
 
 

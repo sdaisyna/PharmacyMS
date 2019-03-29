@@ -198,37 +198,34 @@
   <label for="medicine_category"><i class="fa fa-pills"></i> Medicine category :</label>
   <br>
   <select class="col-sm-12" name="medicine_type_name">
-  @foreach($medicinetype as $medType)
-           <option value={{ $medType->medicine_type_id }}>{{$medType->medicine_type_name}}</option>
-           @endforeach
-
-
-</select>
+    @foreach($medicinetype as $medType)
+        <option value={{ $medType->medicine_type_id }}>{{$medType->medicine_type_name}}</option>
+    @endforeach
+  </select>
 </div>  
 
 
-     <div class="form-group">
-       <label for="desciption"><i class="fa fa-sticky-note"></i>Description :</label>
-       <textarea class="form-control" name="description" rows="4">
-</textarea>
+<div class="form-group">
+    <label for="desciption"><i class="fa fa-sticky-note"></i>Description :</label>
+    <textarea class="form-control" name="description" rows="4"></textarea>
 </div>
+
 <div class="form-group">
      <label for=" price"><i class="fa fa-dollar"></i>  Price :</label>
      <input type="form-control" name="rate" class="form-control" >
-     </div>
+</div>
 
 <!-- image -->
-                          <div class="form-group">
-            <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
-              <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required>
-              @if ($errors->has('image'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('image') }}</strong>
-                                    </span>
-                                @endif
+<div class="form-group">
+    <label for="image"><i class="fa fa-file-image-o"></i> Image :</label>
+    <input type="file" accept=".png, .jpg, .jpeg"  id="uploadImage" name="image" class="form-control{{ $errors->has('image') ? ' is-invalid' : '' }}" required>
+        @if ($errors->has('image'))
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('image') }}</strong>
+            </span>
+        @endif
          
-        
-            </div>
+</div>
 
 <div class="form-group">
      <label for=" manufacture date"><i class="fa fa-calendar"></i>  Manufactured date :</label>

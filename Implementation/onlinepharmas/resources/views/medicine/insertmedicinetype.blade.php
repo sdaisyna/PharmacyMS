@@ -85,7 +85,7 @@
                     </ul>
                 </div>
             </nav>
-        </header>
+        </header> 
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
@@ -296,7 +296,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
             @endif
             </tbody>
         </table>
-    </div>
+</div>
 
                         </div>
 

@@ -6,22 +6,24 @@
                 <div class="col-lg-9 d-md-flex">
                     <h6 class="mr-3"><span class="mr-2"><i class="fa fa-mobile"></i></span> call us now! +1 4385316</h6>
                     <h6 class="mr-3"><span class="mr-2"><i class="fa fa-envelope-o"></i></span> medinocare@gmail.com</h6>
-                        <h6 class="mr-3"><span class="mr-2"><i class="fa fa-dollar"></i></span> Cash on delivery</h6>
+                    <h6 class="mr-3"><span class="mr-2"><i class="fa fa-dollar"></i></span> Cash on delivery</h6>
                 </div>
-                <div class="col-lg-3">
-                    <div class="social-links">
-                        <ul>
-                            <li><a href="{{url('https://www.facebook.com/')}}"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="{{url('https://np.linkedin.com/')}}"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="{{url('https://twitter.com/')}}"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="{{url('https://www.instagram.com/')}}"><i class="fa fa-instagram"></i></a></li>
+            <div class="col-lg-3">
+                <div class="social-links">
+                    <ul>
+                        <li><a href="{{url('https://www.facebook.com/')}}"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="{{url('https://np.linkedin.com/')}}"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="{{url('https://twitter.com/')}}"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="{{url('https://www.instagram.com/')}}"><i class="fa fa-instagram"></i></a></li>
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
+            </div>
             </div>
         </div>
     </div>
+
+
     <div id="header" id="home">
         <div class="container">
             <div class="row align-items-center justify-content-between d-flex">
@@ -40,24 +42,26 @@
                     <li><abbr title="help" ><a href="/help"><span><i class="fa fa-question"></i></span></a></abbr></li>
                     @else
                     <li>
-                    <a href="{{ route('logout')}}"
-
-                 onclick="event.preventDefault();
-                document.getElementById('logout-form').submit();">LogoUT
-            </a>
-        </li>
-                    <li class="menu-has-children"><a href=""><i class="fa fa-user"></i></a>
+                
+                    </li>
+                    <li class="menu-has-children"><a href="{{url('/')}}" style> {{ Auth::user()->name }}</i></a>
                         <ul>
-                            <li><a href="/editprofile">Profile</a></li>
-                            <li><a href="blog-details.html">Reset password</a></li>
+                            <li><a href="/editprofile">Your profile</a></li>
+                            <li>
+                            <a href="{{ route('logout')}}"
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">LogoUT
+                            </a>
+                            </li>
                         </ul>
                     </li>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{@csrf_field()}}
-                 </form>            
+                    </form>            
                     @endguest
                 </ul>
-            </nav><!-- #nav-menu-container -->
+            </nav>
+            <!-- #nav-menu-container -->
             </div>
         </div>
     </div>
