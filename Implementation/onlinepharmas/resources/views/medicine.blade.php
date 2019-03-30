@@ -92,7 +92,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-9 col-md-12 mt-5">
+            <div class="col-lg-9 col-md-12 mt-5"> 
                 <div class="container">
                     <div class="row">
                         @foreach($medicine as $medicines)

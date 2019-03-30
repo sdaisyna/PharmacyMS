@@ -26,7 +26,7 @@
 style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);">
 </div>
 </div>
-        <table class="table" id="myTable">
+        <table class="table" style="border:1px solid;" id="myTable">
             <thead class="bg-dark" >
             <tr class="text-light">
                 <th>Image</th>
@@ -47,9 +47,17 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
 
                     <td>{!! str_limit($addtocarts->medicine_name,60) !!}</td>
 
-                    <td>{!! str_limit($addtocarts->rate,2200) !!}</td>
-                    <td></td>
-                    <td></td>
+                    <td class="price">{!! str_limit($addtocarts->rate,2200) !!}</td>
+                    <td>
+               
+                        
+                        <input type="number" class="form-control mb-3 col-sm-3 qty" value="1"  min="1">
+                     
+                       
+                    </td>
+                    <td class="total">
+                    {!! str_limit($addtocarts->rate,2200) !!}
+                    </td>
                         <td><form action="{{url('/cart',$addtocarts->cart_id)}}" method="POST">
                             {{ csrf_field() }} 
                                 {!! method_field('DELETE') !!}
@@ -65,6 +73,67 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
          @endif
             </tbody>
         </table>
+
+        <div>
+        <span>
+        Sub Total:
+        </span>
+        <span>
+        <label id="subTotal"></label>
+        </span>
+        <br>
+        <span>
+        Shiping charge:
+        </span>
+        <span>
+        Rs.<label>100</label>
+        </span>
+        <br>
+        <span> GrandTotal:</span>
+        <span><label id="GTotal"></label></span>
+        </div>
+
+        <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
+					<script type="text/javascript">
+						$(document).ready(function(){
+
+							var prices = $('.total');
+							var total = 0;
+							var Gtotal = 0;
+							 $.each(prices, function(i, price){
+							  var pc=$(this).text();  
+							  if (pc!= 'NA'){
+							       total = total + parseInt(pc,10);
+							       Gtotal = total + 100;
+							  }});
+							$('#subTotal').text(total);
+							$('#GTotal').text(Gtotal);
+
+
+
+							$('.qty').on('keyup change', function () {
+						    
+						    var q = $(this).val();
+						    var p = $(this).closest('tr').find('.price').text();
+						    var tot = p*q;
+
+						    $(this).closest('tr').find('.total').text(tot);
+
+						    var prices = $('.total');
+							var total = 0;
+							var Gtotal = 0;
+							 $.each(prices, function(i, price){
+							  var pc=$(this).text();  
+							  if (pc!= 'NA'){
+							       total = total + parseInt(pc,10);
+							       Gtotal = total + 100;
+							  }});
+							$('#subTotal').text(total);
+							$('#GTotal').text(Gtotal);
+						});		
+						});
+						
+                    </script>
     </div>
 @endsection
 
