@@ -21,10 +21,13 @@
 <div class="container">
 
         <div class="row" >
-<div class="col-md-4">
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search medicine"
-style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);">
-</div>
+        <form class="form-header" action="" method="POST">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search medicine" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
 </div>
         <table class="table" style="border:1px solid;" id="myTable">
             <thead class="bg-dark" >
@@ -56,13 +59,13 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
                        
                     </td>
                     <td class="total">
-                    {!! str_limit($addtocarts->rate,2200) !!}
+                    {!! $addtocarts->rate !!}
                     </td>
                         <td><form action="{{url('/cart',$addtocarts->cart_id)}}" method="POST">
                             {{ csrf_field() }} 
                                 {!! method_field('DELETE') !!}
                                 
-                                <button onclick="if (!confirm('Are you sure to delete this medicine?')) { return false }" type="submit" name="delete" class="btn btn-danger btn-sm"> Delete</button>
+                                <button onclick="if (!confirm('Are you sure to remove from cart?')) { return false }" type="submit" name="delete" class="btn btn-danger btn-sm"> Remove</button>
                             </form></td>
                     </tr> 
                 @endforeach
@@ -73,25 +76,37 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
          @endif
             </tbody>
         </table>
-
-        <div>
-        <span>
-        Sub Total:
-        </span>
+        <div class="border-bottom border-white "></div>
+            <hr class="border">
+            <div class="container">
+            <div class="row">
+            <div class="col-9"></div>
+        <div class="mt-3">
+       <span>Subtotal  &nbsp; Rs. </span>
         <span>
         <label id="subTotal"></label>
         </span>
         <br>
         <span>
-        Shiping charge:
+        Shipping charges &nbsp;
         </span>
         <span>
         Rs.<label>100</label>
         </span>
-        <br>
-        <span> GrandTotal:</span>
+        <hr>
+        
+        <span class="mt-2"> <b class="text-dark">Net Amount Payable  &nbsp;Rs.</b></span>
         <span><label id="GTotal"></label></span>
+        
         </div>
+        <p>*Price shown includes of all applicable taxes, fees and subject to availability.</p>
+        <div class="col-9 mr-3"></div>
+        <button class="btn btn-success mb-3 pr-4 pl-4">Proceed to order</button>
+        </div>
+        </div>
+        </div>
+        </div>
+       
 
         <script src="assets/js/vendor/jquery-2.2.4.min.js"></script>
 					<script type="text/javascript">
