@@ -48,16 +48,14 @@
                         <img src="/{{ $addtocarts->image}}" style="height:100px; width:100px;">
                     </td>
 
-                    <td>{!! str_limit($addtocarts->medicine_name,60) !!}</td>
+                    <td>{!! $addtocarts->medicine_name !!}</td>
 
-                    <td class="price">{!! str_limit($addtocarts->rate,2200) !!}</td>
-                    <td>
-               
-                        
-                        <input type="number" class="form-control mb-3 col-sm-3 qty" value="1"  min="1">
-                     
-                       
+                    <td class="price">{!! $addtocarts->rate !!}</td>
+
+                    <td> 
+                        <input type="number" class="form-control mb-3 col-sm-3 qty" value="1"  min="1" oninput="validity.valid||(value='')">
                     </td>
+
                     <td class="total">
                     {!! $addtocarts->rate !!}
                     </td>
@@ -76,34 +74,27 @@
          @endif
             </tbody>
         </table>
-        <div class="border-bottom border-white "></div>
-            <hr class="border">
-            <div class="container">
-            <div class="row">
-            <div class="col-9"></div>
-        <div class="mt-3">
-       <span>Subtotal  &nbsp; Rs. </span>
-        <span>
-        <label id="subTotal"></label>
-        </span>
-        <br>
-        <span>
-        Shipping charges &nbsp;
-        </span>
-        <span>
-        Rs.<label>100</label>
-        </span>
-        <hr>
+            <div class="border-bottom border-white "></div>
+                <hr class="border">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-9"></div>
+                    <div class="mt-3">
+                        <span>Subtotal  &nbsp; Rs. </span>
+                        <span><label id="subTotal"></label></span>
+                        <br>
+                        <span>Shipping charges &nbsp;</span>
+                        <span>Rs.<label>100</label></span>
+                        <hr>
+                        <span class="mt-2"> <b class="text-dark">Net Amount Payable  &nbsp;Rs.</b></span>
+                        <span><label id="GTotal"></label></span>
         
-        <span class="mt-2"> <b class="text-dark">Net Amount Payable  &nbsp;Rs.</b></span>
-        <span><label id="GTotal"></label></span>
-        
-        </div>
-        <p>*Price shown includes of all applicable taxes, fees and subject to availability.</p>
-        <div class="col-9 mr-3"></div>
-        <button class="btn btn-success mb-3 pr-4 pl-4">Proceed to order</button>
-        </div>
-        </div>
+                    </div>
+                        <p>*Price shown includes of all applicable taxes, fees and subject to availability.</p>
+                        <div class="col-9 mr-3"></div>
+                        <button class="btn btn-success mb-3 pr-4 pl-4">Proceed to order</button>
+                    </div>
+                </div>
         </div>
         </div>
        
@@ -148,7 +139,7 @@
 						});		
 						});
 						
-                    </script>
+        </script>
     </div>
 @endsection
 
