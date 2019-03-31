@@ -138,7 +138,7 @@ class InsertMedicineTypeController extends Controller
         $medicine=MedicineType::find($id);
 
          $medicine->delete();
-            return redirect()->to('/addmedicinetype')->withSuccess('Category deleted successfully !'); 
+            return redirect()->to('/addmedicinetype');
     }
     public function medcategory()
     {

@@ -65,7 +65,7 @@ Route:: group(['middleware'=>'admin'],function(){
     }); 
 
     Route::get('/pharmacistPanel/{id}','PharmacistProfileController@edit');
-Route::put('/updateprofile/{id}','PharmacistProfileController@update');//yo chai update garya 
+    Route::put('/updateprofile/{id}','PharmacistProfileController@update');//yo chai update garya 
 
 
 //insert medicine type
@@ -117,6 +117,24 @@ Route::get('/cart','CartController@show')->middleware('auth');
 
 Route::post('/cart/{id}','CartController@create')->middleware('auth');
 Route::delete('/cart/{id}','CartController@destroy');//delete
+
+//search in mediciine blade
+
+
+Route::any('/medicine',function(){
+    $search=Input::get('search');
+    $medicinename=Medicine::where('medicine_name','LIKE','%' .$search. '%')->get();
+
+    if(count($medicinename)>0)
+    
+        return view('/medicine')->withDetails($medicinename)->withQuery ($search);
+    else return view ('/medicine')->withMessage('No data found');
+    
+});
+
+//ordering medicine
+Route::put('/cart','OrderController@store');
+
 
 
 

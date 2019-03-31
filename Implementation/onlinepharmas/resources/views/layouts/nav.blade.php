@@ -50,7 +50,7 @@
                             <li>
                             <a href="{{ route('logout')}}"
                                 onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">LogoUT
+                                document.getElementById('logout-form').submit();">Logout
                             </a>
                             </li>
                         </ul>

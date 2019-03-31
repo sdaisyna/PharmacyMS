@@ -1,14 +1,7 @@
 @extends('layouts.app')
 @section('title')@stop 
 @section('content')
-<script>
-      var msg = '{{Session::get('loginFirst')}}';
-      var exist = '{{Session::has('loginFirst')}}';
-      if(exist)
-      {
-        alert(msg);
-      }
-</script>
+
 <!-- Banner Area Starts -->
 <section class="banner-area other-page">
     <div class="container">
@@ -54,16 +47,19 @@
             
 
             <div class="col-sm-8 offset-md-2">
-                <form class="form-header" action="" method="POST">
+                <form class="form-header" action="" method="POST" role="search">
+                {{csrf_field()}}
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search medicine" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" name="search" placeholder="Search medicine">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
                     </div>
 
                     <p style="margin-left:20px;margin-right: 20px;">OR</p>
-                    <button class="btn btn-outline-primary pl-4 pr-4"><i class="fa fa-sign-in 3x"></i>Upload Prescription Report</button>
-                </form>
+                    </form>
+                    <form action="">
+                        <button class="btn btn-outline-primary pl-4 pr-4"><i class="fa fa-sign-in 3x"></i>Upload Prescription Report</button>
+                    </form>
 
                     </div>
             </div>
@@ -78,7 +74,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-sm-6">
-                <div class=" mb-4 mb-lg-0">
+                <div class=" mb-4 mb-lg-0" >
                     <h3 class="text-center" style="color: grey;">Categories</h3>
                     <div class="doctor-img">
                         @foreach($medicinetype as $medicinetypes)
@@ -163,6 +159,25 @@
         </div>
         </div>
 </section>
+
+
+<script>
+      var msg = '{{Session::get('success')}}';
+      var exist = '{{Session::has('success')}}';
+      if(exist)
+      {
+        alert(msg);
+      }
+</script>
+
+<script>
+      var msg = '{{Session::get('loginFirst')}}';
+      var exist = '{{Session::has('loginFirst')}}';
+      if(exist)
+      {
+        alert(msg);
+      }
+</script>
 
 
     <!-- Specialist Area Starts -->

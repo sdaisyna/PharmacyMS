@@ -25,9 +25,9 @@ class CartController extends Controller
 		$cart->medicine_id=$id;
 		$cart->user_id=$request->user_id;
 		$cart->save();
-		return redirect()->back()->with('passed','Your medicine is added to cart !');
+		return redirect()->back()->with('success','Your medicine is added to cart !');
 	   }  
-	   
+	    
 	}
 
 	public function show(Cart $cart)

@@ -358,7 +358,7 @@ function myFunction() {
     <!-- Main JS-->
     <script src="js/main.js"></script>
 
-    <script>
+<script>
       var msg = '{{Session::get('success')}}';
       var exist = '{{Session::has('success')}}';
       if(exist)

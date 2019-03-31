@@ -23,7 +23,7 @@
         <div class="row" >
         <form class="form-header" action="" method="POST">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search medicine" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search medicine">
                     <div class="input-group-append">
                         <button class="btn btn-secondary"><i class="fa fa-search"></i></button>
                     </div>
@@ -92,7 +92,18 @@
                     </div>
                         <p>*Price shown includes of all applicable taxes, fees and subject to availability.</p>
                         <div class="col-9 mr-3"></div>
-                        <button class="btn btn-success mb-3 pr-4 pl-4">Proceed to order</button>
+                        <form method="post" action="{{url('/cart',$addtocarts)}}">
+												{{csrf_field()}}
+												{{ method_field('put')}}
+
+												<input type="hidden" name="medicine_id" value="" />
+												@auth
+												<input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
+												@endauth
+
+                        <button class="btn btn-success mb-3 pr-4 pl-4" type="submit">Proceed to order</button>
+                        </form>
+                        
                     </div>
                 </div>
         </div>
@@ -140,7 +151,34 @@
 						});
 						
         </script>
+
     </div>
+
+    <script>
+        function myFunction() {
+        // Declare variables 
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1)
+         {
+            tr[i].style.display = "";
+         }
+        else
+         {
+            tr[i].style.display = "none";
+         }
+    } 
+  }
+}
+</script>
 @endsection
 
 
