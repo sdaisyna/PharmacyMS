@@ -1,5 +1,6 @@
 <?php
-
+Use App\Medicine;
+use App\MedicineType;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

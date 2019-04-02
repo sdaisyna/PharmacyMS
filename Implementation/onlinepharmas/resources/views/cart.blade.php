@@ -92,7 +92,7 @@
                     </div>
                         <p>*Price shown includes of all applicable taxes, fees and subject to availability.</p>
                         <div class="col-9 mr-3"></div>
-                        <form method="post" action="{{url('/cart',$addtocarts)}}">
+                        <form method="post" action="{{url('',$addtocarts)}}">
 												{{csrf_field()}}
 												{{ method_field('put')}}
 
