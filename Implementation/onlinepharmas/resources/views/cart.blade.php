@@ -87,12 +87,12 @@
                         <span>Rs.<label>100</label></span>
                         <hr>
                         <span class="mt-2"> <b class="text-dark">Net Amount Payable  &nbsp;Rs.</b></span>
-                        <span><label id="GTotal"></label></span>
+                        <span><label id="NTotal"></label></span>
         
                     </div>
                         <p>*Price shown includes of all applicable taxes, fees and subject to availability.</p>
                         <div class="col-9 mr-3"></div>
-                        <form method="post" action="{{url('',$addtocarts)}}">
+                        <form method="post" action="">
 												{{csrf_field()}}
 												{{ method_field('put')}}
 
@@ -114,17 +114,17 @@
 					<script type="text/javascript">
 						$(document).ready(function(){
 
-							var prices = $('.total');
+							var rate = $('.total');
 							var total = 0;
-							var Gtotal = 0;
-							 $.each(prices, function(i, price){
+							var Nettotal = 0;
+							 $.each(rate, function(i, price){
 							  var pc=$(this).text();  
 							  if (pc!= 'NA'){
 							       total = total + parseInt(pc,10);
-							       Gtotal = total + 100;
+							       Nettotal = total + 100;
 							  }});
 							$('#subTotal').text(total);
-							$('#GTotal').text(Gtotal);
+							$('#NTotal').text(Nettotal);
 
 
 
@@ -136,17 +136,17 @@
 
 						    $(this).closest('tr').find('.total').text(tot);
 
-						    var prices = $('.total');
+						    var rate = $('.total');
 							var total = 0;
-							var Gtotal = 0;
-							 $.each(prices, function(i, price){
+							var Nettotal = 0;
+							 $.each(rate, function(i, price){
 							  var pc=$(this).text();  
 							  if (pc!= 'NA'){
 							       total = total + parseInt(pc,10);
-							       Gtotal = total + 100;
+							       Nettotal = total + 100;
 							  }});
 							$('#subTotal').text(total);
-							$('#GTotal').text(Gtotal);
+							$('#NTotal').text(Nettotal);
 						});		
 						});
 						

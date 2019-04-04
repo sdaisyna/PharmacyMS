@@ -23,7 +23,7 @@ Route::get('/medicine', function () {
 Route::get('/cart', function () {
     return view('cart');
 });
-
+ 
 Route::get('/contact', function () {
     return view('contact');
 });
@@ -122,19 +122,23 @@ Route::delete('/cart/{id}','CartController@destroy');//delete
 //search in mediciine blade
 
 
-Route::any('/medicine',function(){
-    $search=Input::get('search');
-    $medicinename=Medicine::where('medicine_name','LIKE','%' .$search. '%')->get();
+// Route::any('/medicine',function(){
+//     $search=Input::get('search');
+//     $medicinename=Medicine::where('medicine_name','LIKE','%' .$search. '%')->get();
 
-    if(count($medicinename)>0)
+//     if(count($medicinename)>0)
     
-        return view('/medicine')->withDetails($medicinename)->withQuery ($search);
-    else return view ('/medicine')->withMessage('No data found');
+//         return view('/medicine')->withDetails($medicinename)->withQuery ($search);
+//     else return view ('/medicine')->withMessage('No data found');
     
-});
+// });
 
 //ordering medicine
 Route::put('/cart','OrderController@store');
+Route::get('/orderdetails','OrderController@index');
+
+
+
 
 
 

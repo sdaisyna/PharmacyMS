@@ -94,34 +94,37 @@ my design registration -->
             <div class="input-group-prepend">
                 <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
              </div>
-                <input name="dateofbirth" class="form-control" placeholder="Date of birth" type="date">
+                <input name="dateofbirth" class="form-control" placeholder="Date of birth" type="date" required autofocus>
             </div>
 
           <!-- Phone number// -->
-        <div class="form-group input-group{{ $errors->has('phone_no') ? ' has-error' : '' }}">
+        <div class="form-group input-group">
         	<div class="input-group-prepend">
     		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
     		</div>
     		<label class="custom-select" style="max-width: 120px;">+977</label>
-        	<input id="phone_no" name="phone_no" class="form-control" placeholder="Phone number" type="text" value="{{ old('phone_no') }}" required autofocus>
+        	<input id="phone_no" name="phone_no" class="form-control{{ $errors->has('phone_no') ? ' is-invalid' : '' }}" placeholder="Phone number" type="text" value="{{ old('phone_no') }}" required autofocus>
             @if ($errors->has('phone_no'))
                                     <span class="help-block">
                                     </span>
-                                @endif
+            @endif
         </div>
 
          <!-- Password// -->
-        <div class="form-group input-group{{ $errors->has('password') ? ' has-error' : '' }}">
+         <div class="form-group input-group">
+        <div class="form-group input-group">
         	<div class="input-group-prepend">
     		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
     		</div>
-            <input id="password" name="password" class="form-control" placeholder="Create password" type="password" required>
-            @if ($errors->has('password'))
+            <input id="password" name="password" class="form-control{{ $errors->has('password') ? ' has-error' : '' }}" placeholder="Create password" type="password" required autofocus>
+            
+        </div> 
+        @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-        </div> 
+                                </div>
 
 
 

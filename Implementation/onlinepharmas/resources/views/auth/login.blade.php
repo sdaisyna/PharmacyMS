@@ -49,14 +49,14 @@ border:0;
       <form class="form-horizontal" method="POST" action="{{ route('login') }}">
       {{ csrf_field() }}
           <!-- Email -->
-          <div class="input-group{{ $errors->has('email') ? ' has-error' : '' }} mb-4">
+          <div class="input-group mb-4">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
               </div>
-              <input id="email" type="text" class="form-control col-12" name="email" placeholder="Email address" value="{{ old('email') }}" required autofocus>
+              <input id="email" type="text" class="form-control col-12{{ $errors->has('email') ? ' has-error' : '' }}" name="email" placeholder="Email address" value="{{ old('email') }}" required autofocus>
 
               @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                     @endif
@@ -70,7 +70,7 @@ border:0;
                 </div>
                 <input id="password" type="password" class="form-control col-md-12" name="password" placeholder="Password" required autofocus>
                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
