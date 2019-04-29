@@ -39,14 +39,16 @@
 
                     @guest
                     <li><a href="/login"><span><i></i>Login</span></a></li>
-                    <li><abbr title="help" ><a href="/help"><span><i class="fa fa-question"></i></span></a></abbr></li>
+                    <li><abbr title="help" ><a href="/help"><span><i class="fa fa-question"></i></span></a></abbr>
+                    </li>
                     @else
                     <li>
                 
                     </li>
-                    <li class="menu-has-children"><a href="{{url('/')}}" style> {{ Auth::user()->name }}</i></a>
+                    <li class="menu-has-children"><a href="" > {{ Auth::user()->name }}</i></a>
                         <ul>
                             <li><a href="/editprofile">Your profile</a></li>
+                            <li><a href="/orders">View Orders</a></li>
                             <li>
                             <a href="{{ route('logout')}}"
                                 onclick="event.preventDefault();

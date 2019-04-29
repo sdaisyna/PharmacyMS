@@ -8,32 +8,12 @@ use DB;
 
 class InsertMedicineController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view ('medicine.insertmedicine');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate(request(),[
@@ -47,23 +27,15 @@ class InsertMedicineController extends Controller
         $form_req=$req->all();
         $medicine=new Medicine();
 
-
         $pictureInfo = $request->file('image');
-
         $picName = $pictureInfo->getClientOriginalName();
-
         $folder = "itemImages/";
-
         $pictureInfo->move($folder,$picName);
-
         $picUrl = $folder.$picName;
         if(MedicineType::where('image', '=', $picUrl)->exists()) //Medicine from model name.
         {
             return redirect('/addmedicine')->with('itemNameExists','Please!!insert image with another name');
         }
-
- 
-
         $medicine->medicine_name=$form_req['medicine_name'];
         $medicine->medicine_type_id=$form_req['medicine_type_name'];
         $medicine->description=$form_req['description'];
@@ -74,9 +46,6 @@ class InsertMedicineController extends Controller
         $medicine->quantity=$form_req['qty']; 
         $status=$medicine->save();
         return redirect()->to('/addmedicine')->with('success','Medicine successfully added!');
-
-
-
     }
 
     /**
@@ -125,7 +94,6 @@ class InsertMedicineController extends Controller
             $pictureInfo->move($folder,$name);
             $picUrl=$folder.$name;
 
-        
             $medicine->medicine_name=$request->medicine_name;
             $medicine->medicine_type_id=$request->medicine_type_name;
             $medicine->description=$request->description;
@@ -135,7 +103,7 @@ class InsertMedicineController extends Controller
             $medicine->expiry_date=$request->expiry_date;
             $medicine->quantity=$request->qty;
 
-            
+
             $medicine->save();
         }
 
@@ -183,4 +151,24 @@ class InsertMedicineController extends Controller
     }
 
 
+    public function searchMedicine(Request $request)
+    {
+        if(is_null($request->searchText))
+        {
+            $medicine=DB::table('medicine')
+            ->join('medicine_type','medicine_type.medicine_type_id','=','medicine.medicine_type_id')
+            ->get(); 
+        }
+
+        else
+        {
+            $medicine=DB::table('medicine')
+            ->join('medicine_type','medicine_type.medicine_type_id','=','medicine.medicine_type_id')
+            ->where('medicine.medicine_name', 'LIKE','%'.$request->searchText.'%')
+            ->orWhere('medicine_type.medicine_type_name', 'LIKE','%'.$request->searchText.'%')
+            ->get(); 
+        }
+        return view('medicine.searchMedicine',compact('medicine'));
+
+    }
 }

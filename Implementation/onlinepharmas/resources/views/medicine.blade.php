@@ -35,84 +35,77 @@
 </div>
 
 
-
 <section class="specialist-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3">
-                <div class="section-top text-center">
-                    <h2>Our medicine</h2>
-                </div>
-            </div>
-            
-
-            <div class="col-sm-8 offset-md-2">
-                <form class="form-header" action="{{url('/searchmedicine')}}" method="POST" role="search">
-                {{csrf_field()}}
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" name="search" placeholder="Search medicine">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
-                    </div>
-
-                    <p style="margin-left:20px;margin-right: 20px;">OR</p>
-                    </form>
-                    <form action="">
-                        <button class="btn btn-outline-primary pl-4 pr-4"><i class="fa fa-sign-in 3x"></i>Upload Prescription Report</button>
-                    </form>
-
-                    </div>
-            </div>
+<div class="container">
+<div class="row">
+    <div class="col-lg-6 offset-lg-3">
+        <div class="section-top text-center">
+            <h2>Our medicine</h2>
         </div>
-    </div>     
+    </div>
+            
+    <div class="col-sm-8 offset-md-2">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="search" id="searchMed" placeholder="Search medicine">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                </div>
+                    <p style="margin-left:20px;margin-right: 20px;">OR</p>
+        <form action="{{url('/uploadreport')}}">
+            {{csrf_field()}}
+            <button class="btn btn-outline-primary pl-4 pr-4"><i class="fa fa-sign-in 3x">
+            </i>Upload Prescription Report</button>
+        </form>
+                </div>
+    </div>
+</div>
+</div>     
 
-        <br> 
-        <br>
-        <br> 
+    <br> 
+    <br>
+    <br> 
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class=" mb-4 mb-lg-0" >
-                    <h3 class="text-center" style="color: grey;">Categories</h3>
-                    <div class="doctor-img">
-                        @foreach($medicinetype as $medicinetypes)
-                    </div>
+<div class="container">
+<div class="row">
+    <div class="col-lg-3 col-sm-6">
+        <div class=" mb-4 mb-lg-0" >
+            <h3 class="text-center" style="color: grey;">Categories</h3>
+                <div class="doctor-img">
+                    @foreach($medicinetype as $medicinetypes)
+                </div>
                 <div class="content-area">
                     <div class="doctor-name text-center">
                         <a href="medicine.php"><h3>{!! $medicinetypes->medicine_type_name!!}</h3></a>
                     </div>
-                        @endforeach
+                    @endforeach
                 </div>
-                </div>
-            </div>
+        </div>
+</div>
 
-            <div class="col-lg-9 col-md-12 mt-5"> 
-                <div class="container">
-                    <div class="row">
-                        @foreach($medicine as $medicines)
-                            <div class="col-md-6"  > 
-                            <div class="text-center shadow bg-white" style=" padding:2rem; margin:2rem 2rem">
-                                <img src="{!! $medicines->image!!}" height="120px;">
-                                    <h3>{!! $medicines->medicine_name!!}</h3>
-                                    <p class="pt-3"> Rs.{!! $medicines->rate!!}</p>
-                                    <form action="{{url('/cart',$medicines->medicine_id)}}" method="post">
-                                    {{csrf_field()}}
-                                    @auth
+    <div class="col-lg-9 col-md-12 mt-5"> 
+        <div class="container">
+        <div class="row" id="dataFound">
+            @foreach($medicine as $medicines)
+                <div class="col-md-6"  > 
+                    <div class="text-center shadow bg-white" style=" padding:2rem; margin:2rem 2rem">
+                        <img src="{!! $medicines->image!!}" height="120px;">
+                        <h3>{!! $medicines->medicine_name!!}</h3>
+                        <p class="pt-3"> Rs.{!! $medicines->rate!!}</p>
+                            <form action="{{url('/cart',$medicines->medicine_id)}}" method="post">
+                                {{csrf_field()}}
+                                @auth
                                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
-                                    @endauth
+                                @endauth
                                     <button class="btn btn-md btn-primary">Add to Cart</button> <br>
-                                    </form>
-                                    
-<!-- Button trigger modal -->
-                <small><a  href="" data-toggle="modal" data-target="#g{!! $medicines->medicine_id !!}">
-                <u>View-Info</u>
-                </a>
-                </small>
+                            </form>
+                        <small><a  href="" data-toggle="modal" data-target="#g{!! $medicines->medicine_id !!}">
+                        <u>View-Info</u>
+                        </a></small>
 
 <!-- Modal -->
-<div class="modal fade" id="g{!! $medicines->medicine_id !!}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="g{!! $medicines->medicine_id !!}" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -148,27 +141,17 @@
 
 
 
-                            </div>
-                            </div>
-                        @endforeach
-
+        </div>
+    </div>
+    @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-        </div>
-        </div>
-        </div>
-        </div>
 </section>
 
-
-<script>
-      var msg = '{{Session::get('success')}}';
-      var exist = '{{Session::has('success')}}';
-      if(exist)
-      {
-        alert(msg);
-      }
-</script>
 
 <script>
       var msg = '{{Session::get('loginFirst')}}';
@@ -180,6 +163,28 @@
 </script>
 
 
-    <!-- Specialist Area Starts -->
+<script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(document).ready(function(){
 
+            $('#searchMed').change(function(e){
+            e.preventDefault();
+            var textSearch = $('#searchMed').val();
+                $.ajax({
+                url: "{{ URL('/txtSearch') }}",
+                method: 'GET',
+                datatype : 'html',
+                data: {
+                searchText : textSearch,
+                    },
+                success: function(response){
+                console.log(response);
+                $("#dataFound").html(response);
+                }     
+                    });
+                
+                });
+                });
+
+</script>
 @endsection

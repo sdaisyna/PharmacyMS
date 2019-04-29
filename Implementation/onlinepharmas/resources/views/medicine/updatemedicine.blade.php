@@ -67,7 +67,7 @@
                                 <i class="fas fa-calendar-alt"></i>Categories</a>
                         </li>
                         <li>
-                            <a href="order.html">
+                            <a href="/orderlist">
                                 <i class="fas fa-map-marker-alt"></i>Order list</a>
                         </li>
 
@@ -76,10 +76,6 @@
                               <i class="fas fa-registered"></i>Registered Users</a>
                       </li>
 
-                        <li class="has-sub">
-                            <a class="js-arrow" href="stock.html">
-                                <i class="fas fa-desktop"></i>Stock</a>
-                        </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="help.html">
                                 <i class="fas fa-question"></i>Help</a>
@@ -114,7 +110,7 @@
                               <i class="fas fa-calendar-alt"></i>Categories</a>
                       </li>
                       <li>
-                          <a href="order.html">
+                          <a href="/orderlist">
                               <i class="fas fa-map-marker-alt"></i>Order list</a>
                       </li>
 
@@ -123,10 +119,6 @@
                               <i class="fas fa-registered"></i>Registered Users</a>
                       </li>
 
-                      <li class="has-sub">
-                          <a class="js-arrow" href="stock.html">
-                              <i class="fas fa-desktop"></i>Stock</a>
-                      </li>
                       <li class="has-sub">
                           <a class="js-arrow" href="help.html">
                               <i class="fas fa-question"></i>Help</a>

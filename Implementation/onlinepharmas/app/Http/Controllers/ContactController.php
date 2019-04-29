@@ -16,7 +16,6 @@ class ContactController extends Controller
 
     }
         
-
     /**
      * Show the form for creating a new resource.
      *
@@ -41,9 +40,8 @@ class ContactController extends Controller
         $contact->subject=$request->subject;
         $contact->message=$request->message; 
 
-        
-            $contact->save();
-             return redirect()->to('/contact')->with('success','Thanks for your information !'); //yo vaneko kun view ma jane
+        $contact->save();
+         return redirect()->to('/contact')->with('success','Thanks for your information !'); //yo vaneko kun view ma jane
     }
 
     /**

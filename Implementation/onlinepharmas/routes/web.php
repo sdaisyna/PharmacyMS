@@ -2,16 +2,6 @@
 Use Illuminate\Support\Facades\Input;
 Use App\Medicine;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome'); 
@@ -33,25 +23,19 @@ Route::get('/login', function () {
     return view('login');
 });
 Route::get('/help', function () { 
-    return view('help');
+    return view('medicine.help');
 });
 
 Route::get('/register', function () {
     return view('auth.register');
 }); 
 
-
 Route::get('/editprofile', function (){
     return view ('medicine/editprofile');
 });
 
-
-
-
 Route::get('/editprofile/{id}','EditProfileController@edit');
 Route::put('/updateprofile/{id}','EditProfileController@update');//yo chai update garya 
-
-
 
 Auth::routes();
 
@@ -61,9 +45,6 @@ Route:: group(['middleware'=>'admin'],function(){
 
     Route::get('/pharmacistPanel', function () {
         return view('medicine.pharmacistpanel');
-
-    
-    
     }); 
 
     Route::get('/pharmacistPanel/{id}','PharmacistProfileController@edit');
@@ -154,6 +135,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/gomedicine', function(){
     return response()->json(['website'=>'medicine']);
   });
+
+  //proceed to order
+Route::post('/order', 'OrderController@order');
+
+//generate bill after ordering
+Route::get('/orders', 'BillController@index');
+
+Route::get('/genBill', 'BillController@show');
+
+//customer orderlist in admin panel
+Route::get('/orderlist', 'OrderController@show');
+
+//admin bill generating
+Route::get('/usersbill', 'BillController@showAdminBill');
+
+//searching medicine
+Route::get('/txtSearch', 'InsertMedicineController@searchMedicine');
 
 
 

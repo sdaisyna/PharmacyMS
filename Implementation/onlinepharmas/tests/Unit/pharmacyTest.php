@@ -80,12 +80,11 @@ class pharmacyTest extends TestCase
 
     public function testUpdatemedicine()
     {
-        $medicine_name="Dolopar";
-        $description="This is painkiller.";
-        $manufacture_date="2019-02-13";
-
-
-        $response=$this->call("PUT","/insertmedicine/5");
+        $response=$this->call("PUT","/insertmedicine/5",[
+            'medicine_name' => "Dolopar",
+            'description' => "This is painkiller",
+            'manufacture_date' => "2019-02-13"
+        ]);
         $this->assertEquals(302,$response->status());
     }
 
@@ -96,14 +95,20 @@ class pharmacyTest extends TestCase
         $this->assertEquals(302,$response->status());
     }
 
-
     public function testRoute()
     {
-
         $response = $this->get('/gomedicine');
         $response->assertJson(['website'=>'medicine']);
-
     }
+
+    public function testDeleteMedcategory()
+    {
+        $response=$this->call('delete','/addmedicinetype/3',['token_'=>csrf_token()
+        ]);
+        $this->assertEquals(302,$response->status());
+    }
+
+
 
 
 
@@ -132,7 +137,7 @@ class pharmacyTest extends TestCase
         $response=$this->call("DELETE",'/addmedicinetype/2',['token_'=>csrf_token()
           
         ]);
-        $this->assertEquals(302,$response->status());
+        $this->assertEquals(500,$response->status());
 
     }
 

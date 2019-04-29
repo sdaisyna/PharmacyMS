@@ -70,7 +70,7 @@
                                 <i class="fas fa-calendar-alt"></i>Categories</a>
                         </li>
                         <li>
-                            <a href="order.html">
+                            <a href="/orderlist">
                                 <i class="fas fa-map-marker-alt"></i>Order list</a>
                         </li>
 
@@ -80,7 +80,7 @@
                       </li>
 
                         <li class="has-sub">
-                            <a class="js-arrow" href="help.html">
+                            <a class="js-arrow" href="">
                                 <i class="fas fa-question"></i>Help</a>
                         </li>
                     </ul>
@@ -112,8 +112,8 @@
                           <a href="/addmedicinetype">
                               <i class="fas fa-calendar-alt"></i>Categories</a>
                       </li>
-                      <li>
-                          <a href="order.html">
+                      <li> 
+                          <a href="/orderlist">
                               <i class="fas fa-shopping-cart"></i>Order list</a>
                       </li>
 
@@ -123,7 +123,7 @@
                       </li>
 
                       <li class="has-sub">
-                          <a class="js-arrow" href="help.html">
+                          <a class="js-arrow" href="">
                               <i class="fas fa-question"></i>Help</a>
                       </li>
                     </ul>
@@ -180,7 +180,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="overview-wrap">
-                        <h2 class="title-1">Registered User </h2>
+                        <h2 class="title-1">Customer's order list</h2>
                     </div>
                 
             </div>
@@ -190,33 +190,39 @@
 
 <div class="container">
         <div class="row" >
-<div class="col-md-4">
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search registered user"
-style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);">
-</div>
+
 </div>
 <table  id="myTable" class="table table-bordered">
             <thead>
             <tr>
-                <th>Id</th>
+                <th>S.N.</th>
                 <th>Name</th>
-                <th>Address</th>
+                <th>Shipping Address</th>
                 <th>Phone number</th>
                 <th>Email</th>
-                <th>Posted date</th>
+                <th>Action</th>
 
             </tr>
             </thead>
             <tbody>
            
-                @foreach($registeruser as $users)
+                @foreach($viewOrders as $key=> $view)
                     <tr>
-                    <td>{{$users->id}}</td>
-                        <td>{!! ($users->name) !!}</td>
-                         <td>{!! ($users->address) !!}</td>
-                          <td>{!! ($users->phone_no) !!}</td>
-                           <td>{!! ($users->email) !!}</td>
-                        <td>{!! $users->created_at !!}</td>
+                    <td>{{$key+1}}</td>
+                    <td>{!! ($view->name) !!}</td>
+                    <td>{!! ($view->shipping_address) !!}</td>
+                    <td>{!! ($view->phone_no) !!}</td>
+                    <td>{!! ($view->email) !!}</td>
+                    <td>
+                    <form action="/usersbill" method="POST">
+                    {{ csrf_field() }}
+                        {{ method_field('GET') }}
+                        <input type="hidden" name="orderid" value="{{$view->order_id}}">
+                        <button type="submit" name="genBill" class="btn btn-primary btn-sm">Generate Bill</button>
+                    </form>
+                    </td>
+                       
+                    
                        
                     </tr>
                 @endforeach
@@ -246,28 +252,7 @@ style="background: #f5f7f5; padding:7px; font-size:15px; color: rgb(61, 38, 38);
         alert(msg);
       }
 </script>
-  <script>
-function myFunction() {
-  // Declare variables 
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  // Loop through all table rows, and hide those who don't match the search query
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    } 
-  }
-}
-</script>
+ 
 
 
     <!-- Jquery JS-->

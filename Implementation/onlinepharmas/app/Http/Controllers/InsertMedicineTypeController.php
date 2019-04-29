@@ -51,11 +51,8 @@ class InsertMedicineTypeController extends Controller
         $medicinetype=new MedicineType;
 
         $pictureInfo = $request->file('image');
-
         $picName = $pictureInfo->getClientOriginalName();
-
         $folder = "itemImages/";
-
         $pictureInfo->move($folder,$picName);
 
         $picUrl = $folder.$picName;
@@ -64,12 +61,10 @@ class InsertMedicineTypeController extends Controller
             return redirect('/addmedicinetype')->with('itemNameExists','Please!!insert image with another name');
         }
  
-
-
         $medicinetype->medicine_type_name=$request->category_name;
         $medicinetype->image=$picUrl;
-            $medicinetype->save();
-             return redirect()->to('/addmedicinetype')->with('success','Medicine category is added, successfully !');
+        $medicinetype->save();
+        return redirect()->to('/addmedicinetype')->with('success','Medicine category is added, successfully !');
     }
 
     /**
@@ -91,7 +86,7 @@ class InsertMedicineTypeController extends Controller
      */
     public function edit($id)
     {
-       $medicinetype=MedicineType::find($id);
+        $medicinetype=MedicineType::find($id);
         return view('medicine.updatemedicinetype')->with('medicinetype',$medicinetype); 
     }
 
@@ -137,8 +132,8 @@ class InsertMedicineTypeController extends Controller
     {
         $medicine=MedicineType::find($id);
 
-         $medicine->delete();
-            return redirect()->to('/addmedicinetype');
+        $medicine->delete();
+        return redirect()->to('/addmedicinetype');
     }
     public function medcategory()
     {
@@ -147,9 +142,7 @@ class InsertMedicineTypeController extends Controller
 
         $medicine=new Medicine();
         $medicine=$medicine->get();
-
-
-
+        
         return view('medicine',compact('medicinetype','medicine'));
     }
 }

@@ -13,7 +13,8 @@ class CartController extends Controller
 	public function create(Request $request,$id)
 	{
 		//using eloquent(it uses model to find the database instead from DB)
-	   $duplicate_medicine=Cart::where('medicine_id',$request->id)->where('user_id',$request->user_id)->count();
+	   $duplicate_medicine=Cart::where('medicine_id',$request->id)->
+	   							where('user_id',$request->user_id)->count();
 	   if($duplicate_medicine>0)
 	   {
 		   return back()->with('message','Medicine already added !');
